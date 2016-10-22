@@ -1,24 +1,20 @@
-<div class="menu">
-	<a [routerLink]="['/']">
-			<h2>HEM</h2>
-		</a>
+<div [ngClass]="menu">
+
+	<!-- BRAND/HOME link -->
+	<a [routerLink]="['/']"
+	(click)="menu = 'menu'">
+		<h2>HEM</h2>
+	</a>
+
+	<!-- MENU OPTIONS -->
 	<ul>
-		<a [routerLink]="['econ']">
+		<a *ngFor="let option of menuOptions"
+		[routerLink]='option.link'
+		(click)="minify()">
 			<li>
-				<h2>Ekonomi</h2>
+				<h2>{{option.title}}</h2>
 			</li>
 		</a>
-		<li>
-			<h2>Maktpositioner</h2>
-		</li>
-		<li>
-			<h2>Alkohol</h2>
-		</li>
-		<li>
-			<h2>Familj</h2>
-		</li>
-		<li>
-			<h2>Hälsa</h2>
-		</li>
 	</ul>
+
 </div>

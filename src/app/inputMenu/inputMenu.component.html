@@ -1,0 +1,23 @@
+<div [ngClass]="'input-menu'">
+
+	<!-- BRAND/HOME link -->
+	<a [routerLink]="['/']"
+	(click)="menu = 'menu'">
+		<h2>HEM</h2>
+	</a>
+
+	<!-- MENU OPTIONS -->
+	<ul>
+		<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      		<input name="first" ngModel required #first="ngModel">
+      		<input name="last" ngModel>
+      		<button>Submit</button>
+    	</form>
+	</ul>
+
+	<p>First name value: {{ first.value }}</p>
+    <p>First name valid: {{ first.valid }}</p>
+    <p>Form value: {{ f.value | json }}</p>
+    <p>Form valid: {{ f.valid }}</p>
+
+</div>
