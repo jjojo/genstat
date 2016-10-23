@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-
-// webpack html imports
-let template = require('./line-chart.html');
+import { StatisticsService } from '../services/statistics.service';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+//import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'line-chart',
@@ -10,15 +10,103 @@ let template = require('./line-chart.html');
 
 })
 export class LineChartComponent {
-  // lineChart
+  test;
+  years = [];
+  valuesM = [];
+  valuesF = [];
+  // constructor to acess service
+  constructor(private statisticsService: StatisticsService) {
+   
+  }
+
 
   // lineChartData specifies the style and dataset for the graph
   public lineChartData:Array<any> = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', pointRadius: 6},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
   ];
 
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels:Array<String> = this.years;
+  
+
+  getData2(){
+    let t = this;
+      this.statisticsService.getEconData().then(function(data) {
+        console.log(data)
+       let years:Array<String> = [];
+       let valuesM = [];
+       let valuesF = [];
+       for (var i = 0; i < data['data'].length/2; ++i) {
+           years[i] = data['data'][i].key[2]
+           if(data['data'][i].key[1] === "1") {
+             valuesM[i] = data['data'][i].values[0]
+           }
+           if(data['data'][data['data'].length/2 + i].key[1] === "2") {
+             valuesF[i] = data['data'][data['data'].length/2 + i].values[0]
+           }
+        }
+        t.years = years;
+        t.lineChartData = [
+            {data: valuesM, label: 'Series A', pointRadius: 6},
+            {data: valuesF, label: 'Series B'}
+          ]
+     })
+
+     // this.statisticsService.getEconData().then(function(data) {
+     //   for (var i = 0; i < data['data'].length/2; ++i) {
+     //       if(data['data'][i].key[1] === "1") {
+     //         t.valuesM[i] = data['data'][i].values[0]
+     //       }
+     //       if(data['data'][data['data'].length/2 + i].key[1] === "2") {
+     //         t.valuesF[i] = data['data'][data['data'].length/2 + i].values[0]
+     //       }
+     //    }
+     //      // code...
+     //      t.lineChartData = [
+     //        {data: t.valuesM, label: 'Series A', pointRadius: 6},
+     //        {data: t.valuesF, label: 'Series B'}
+     //      ]
+
+     // })
+
+  }
+
+  getData(){
+    let t = this;
+
+     this.statisticsService.getEconData().then(function(data) {
+       let years = [];
+       let valuesM = [];
+       let valuesF = [];
+       for (var i = 0; i < data['data'].length/2; ++i) {
+           years[i] = data['data'][i].key[2]
+
+           if(data['data'][i].key[1] === "1") {
+             valuesM[i] = data['data'][i].values[0]
+           }
+           if(data['data'][data['data'].length/2 + i].key[1] === "2") {
+             valuesF[i] = data['data'][data['data'].length/2 + i].values[0]
+           }
+           t.lineChartLabels[i] = data['data'][i].key[2]
+        }
+
+        t.lineChartLabels = years;
+          // code...
+          t.lineChartData = [
+            {data: valuesM, label: 'Series A', pointRadius: 6},
+            {data: valuesF, label: 'Series B'}
+          ];
+        
+
+        
+         //console.log(years)
+         //console.log(t.lineChartLabels)
+        // console.log(valuesM)
+        // console.log(valuesF)
+        // console.log(data)
+     })
+  }
+
   public lineChartOptions:any = {
     animation: false,
     responsive: true
@@ -41,7 +129,7 @@ export class LineChartComponent {
       pointHoverBorderColor: 'rgba(252,74,26,1)'
     },
   ];
-  public lineChart:boolean = true;
+  public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
   // public randomize():void {

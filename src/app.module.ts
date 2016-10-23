@@ -15,6 +15,8 @@ import { MenuComponent } from './app/menu/menu.component';
 import { EconComponent } from './app/econ/econ.component';
 import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
 
+import { StatisticsService } from './app/services/statistics.service';
+
 
 //declare alll dependencies and libs the app uses
 
@@ -24,7 +26,7 @@ import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
   HttpModule,
   ROUTING,
   ChartsModule,
-  FormsModule
+  FormsModule,
   ],
   declarations: [ 
   MyApp, 
@@ -34,7 +36,11 @@ import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
   MenuComponent,
   EconComponent,
   InputMenuComponent
+  //StatisticsService
   ],
-  bootstrap: [ MyApp ]
+  bootstrap: [ MyApp ],
+  providers : [
+  StatisticsService
+  ]
 })
 export class AppModule {}

@@ -1,7 +1,11 @@
 <div class="chart">
-  <canvas baseChart 
+  <button (click)="getData()">getData</button>
+  <button (click)="getData2()">getData2</button>
+  {{lineChartLabels}}
+  {{test}}
+  <canvas baseChart
         [datasets]="lineChartData"
-        [labels]="lineChartLabels"
+        [labels]="lineChartData"
         [options]="lineChartOptions"
         [colors]="lineChartColors"
         [legend]="lineChartLegend"
