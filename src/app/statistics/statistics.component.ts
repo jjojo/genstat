@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'start',
-  template: require('./start.component.html'),
-  styles: [String(require('./start.component.styl'))]
+  selector: 'statistics',
+  template: require('./statistics.component.html'),
+  styles: [String(require('./statistics.component.styl'))]
 })
-export class StartComponent {
+export class StatisticsComponent {
   constructor(){
-    console.log('In Home constructor');
+    console.log('In statistics constructor');
   }
 
 	items = [

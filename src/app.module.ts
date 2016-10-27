@@ -11,11 +11,17 @@ import { ROUTING } from './app.routing.ts';
 import { MyApp } from './app/app';
 import { About } from './app/about/about';
 import { Home } from './app/home/home';
+import { StartComponent } from './app/start/start.component';
+import { StatisticsComponent } from './app/statistics/statistics.component';
 import { MenuComponent } from './app/menu/menu.component';
 import { EconComponent } from './app/econ/econ.component';
 import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
 
 import { StatisticsService } from './app/services/statistics.service';
+
+import { SelectComponent } from './app/components/select/select';
+import { HighlightPipe } from './app/components/select/select-pipes';
+import { OffClickDirective } from './app/components/select/off-click';
 
 
 //declare alll dependencies and libs the app uses
@@ -35,7 +41,12 @@ import { StatisticsService } from './app/services/statistics.service';
   LineChartComponent,
   MenuComponent,
   EconComponent,
-  InputMenuComponent
+  InputMenuComponent,
+  StartComponent,
+  StatisticsComponent,
+  SelectComponent,
+  HighlightPipe,
+  OffClickDirective
   //StatisticsService
   ],
   bootstrap: [ MyApp ],

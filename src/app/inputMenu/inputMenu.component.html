@@ -1,15 +1,62 @@
-<div [ngClass]="'input-menu'">
-
-	<!-- BRAND/HOME link -->
-	<a [routerLink]="['/']"
-	(click)="menu = 'menu'"
-	(click)="getData()"
-	(click)="getOptions()">
-		<h2>HEM</h2>
-	</a>
+<div class="wrapper">
 
 	<!-- MENU OPTIONS -->
-		<form #f="ngForm">
+	<div>
+		<ng-select [allowClear]="true"
+			[items]="yrken"
+			
+			(data)="refreshValue($event, 'workgroup')"
+			
+			
+			
+			placeholder="Välj yrkesgrupp">
+		</ng-select>
+
+		<pre>{{workgroup.text}}</pre>
+		<pre>{{workgroup.id}}</pre>
+
+		<ng-select [allowClear]="true"
+			[items]="years"
+			[disabled]="disabled"
+			(data)="refreshValue($event, 'yearFrom')"
+			(selected)="selected($event)"
+			(removed)="removed($event)"
+			(typed)="typed($event)"
+			placeholder="år från">
+		</ng-select>
+
+		<pre>{{yearFrom.text}}</pre>
+		<pre>{{yearFrom.id}}</pre>
+
+		<ng-select [allowClear]="true"
+			[items]="years"
+			[disabled]="disabled"
+			(data)="refreshValue($event, 'yearTo')"
+			(selected)="selected($event)"
+			(removed)="removed($event)"
+			(typed)="typed($event)"
+			placeholder="år till">
+		</ng-select>
+
+		<pre>{{yearTo.text}}</pre>
+		<pre>{{yearTo.id}}</pre>
+		
+
+
+
+
+
+
+
+
+
+
+		<div>
+			<button (click)="getStatistics">Hämta statistik</button>
+		</div>
+	</div>
+
+		<!-- <form #f="ngForm">
 		      <select name="yrkesgrupp" ngModel required>
 		        <option value="" disabled>yrkesgrupp</option>
 		        <option *ngFor="let yrke of yrken let ind = index" [ngValue]="{'yrke':yrke, 'index':ind}">
@@ -33,12 +80,12 @@
 
 		      <button (click)='onSubmit(f)'>submit</button>
 
-		</form>
+		</form> -->
 
 
 
-     <p>Form value: {{ f.value | json }}</p>
+     <!-- <p>Form value: {{ f.value | json }}</p>
      <p>Form value: {{ yearFrom.viewModel.index }}</p>
-     <p>To value: {{ yearTo.viewModel.index }}</p>
+     <p>To value: {{ yearTo.viewModel.index }}</p> -->
 
 </div>
