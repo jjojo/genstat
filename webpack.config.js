@@ -26,7 +26,9 @@ module.exports = {
       {test: /\.ts$/, loader: 'ts-loader'},
       {test: /\.styl$/, loader: 'css-loader!stylus-loader'},
       {test: /\.css$/, loader: 'css-loader'},
-      {test: /\.html$/, loader: 'html'}
+      {test: /\.html$/, loader: 'html'},
+      { test: /\.png$/, loader: "url-loader?mimetype=image/png" },
+      { test: /\.svg$/, loader: 'svg-loader' }
     ],
     noParse: [path.join(__dirname, 'node_modules', 'angular2', 'bundles')]
   },
