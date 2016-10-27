@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms';
 
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { ChartModule } from 'angular2-chartjs';
 import { LineChartComponent } from './app/lineChart/line-chart';
 
 import { ROUTING } from './app.routing.ts';
@@ -25,7 +25,7 @@ import { StatisticsService } from './app/services/statistics.service';
   BrowserModule,
   HttpModule,
   ROUTING,
-  ChartsModule,
+  ChartModule,
   FormsModule,
   ],
   declarations: [ 

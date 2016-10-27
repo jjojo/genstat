@@ -1,7 +1,8 @@
 <div class="chart">
   <button (click)="getData()">getData</button>
-  <button (click)="getData2()">getData2</button>
-  {{lineChartLabels}}
+  <!-- <button (click)="getData2()">getData2</button> -->
+  <chart [type]="type" [data]="data" [options]="options"></chart>
+  <!-- {{lineChartLabels}}
   {{test}}
   <canvas baseChart
         [datasets]="lineChartData"
@@ -12,7 +13,7 @@
         [chartType]="lineChartType"
         (chartHover)="chartHovered($event)"
         (chartClick)="chartClicked($event)">
-  </canvas>
+  </canvas> -->
 </div>
   
 
