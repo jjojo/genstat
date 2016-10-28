@@ -4,11 +4,7 @@
 	<div>
 		<ng-select [allowClear]="true"
 			[items]="yrken"
-			
 			(data)="refreshValue($event, 'workgroup')"
-			
-			
-			
 			placeholder="Välj yrkesgrupp">
 		</ng-select>
 
@@ -17,11 +13,7 @@
 
 		<ng-select [allowClear]="true"
 			[items]="years"
-			[disabled]="disabled"
 			(data)="refreshValue($event, 'yearFrom')"
-			(selected)="selected($event)"
-			(removed)="removed($event)"
-			(typed)="typed($event)"
 			placeholder="år från">
 		</ng-select>
 
@@ -30,23 +22,27 @@
 
 		<ng-select [allowClear]="true"
 			[items]="years"
-			[disabled]="disabled"
 			(data)="refreshValue($event, 'yearTo')"
-			(selected)="selected($event)"
-			(removed)="removed($event)"
-			(typed)="typed($event)"
 			placeholder="år till">
 		</ng-select>
 
 		<pre>{{yearTo.text}}</pre>
 		<pre>{{yearTo.id}}</pre>
 		
+<!-- 
 
 
+ORGINAL SPARAD FÖR ATT EVENTULLT BEHÖVER JAG DISABLED
 
-
-
-
+<ng-select [allowClear]="true"
+			[items]="years"
+			[disabled]="disabled"
+			(data)="refreshValue($event, 'yearFrom')"
+			(selected)="selected($event)"
+			(removed)="removed($event)"
+			(typed)="typed($event)"
+			placeholder="år från">
+		</ng-select> -->
 
 
 
