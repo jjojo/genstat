@@ -1,4 +1,54 @@
 @import 'jeet'
+@require '../../assets/css/variables'
 
 .wrapper
 	center(100%, pad:5%)
+	color light-grey
+	
+	.ngSelect
+		font-size 1.6em
+
+	button
+		center()
+		margin-top: 15%
+		background-color: transparent
+		border 2px solid econ-blue
+		border-radius 5px
+		font-size 1.6em
+		padding 5px 25px
+		
+	:host /deep/ 
+		input
+			width: 100%
+			height: auto
+			font-size 1em
+			
+		.form-control
+			height: auto
+			background-color: transparent
+			box-shadow none
+			border 2px solid econ-blue
+			border-radius 5px
+			
+		.ui-select-container
+			margin-bottom: 30px
+			
+		.ui-select-placeholder
+			font-size 1.6em
+			
+		.ui-select-match-text
+			font-size 1.6em
+			
+		.ui-select-choices-row 
+			a
+				white-space: normal !important
+				
+		.text-muted
+			color light-grey
+			
+		.menu-arrow
+			width 30px
+			margin 7px
+			position: absolute
+			right 10px
+			z-index: -1

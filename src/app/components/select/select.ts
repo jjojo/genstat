@@ -74,7 +74,7 @@ let styles = `
   
   .ui-select-multiple input.ui-select-search {
     background-color: transparent !important; /* To prevent double background when disabled */
-    border: none;
+    border: 4px solid green;
     outline: none;
     box-shadow: none;
     height: 1.6666em;
@@ -119,12 +119,11 @@ let styles = `
         <span *ngIf="active.length <= 0" class="ui-select-placeholder text-muted">{{placeholder}}</span>
         <span *ngIf="active.length > 0" class="ui-select-match-text pull-left"
               [ngClass]="{'ui-select-allow-clear': allowClear && active.length > 0}"
-              [innerHTML]="sanitize(active[0].text)"></span>
+              [innerHTML]="sanitize(active[0].text.length >= 20 ? active[0].text.substring(0,20).concat('...') : active[0].text)"></span>
         <i class="dropdown-toggle pull-right"></i>
-        <i class="caret pull-right"></i>
-        <a *ngIf="allowClear && active.length>0" class="btn btn-xs btn-link pull-right" style="margin-right: 10px; padding: 0;" (click)="remove(activeOption)">
-           <i class="glyphicon glyphicon-remove"></i>
-        </a>
+        <object class="menu-arrow pull-right" type="image/svg+xml" data="../../assets/img/play.svg">
+          <img src="../../assets/img/play.png" />
+        </object>
       </span>
     </div>
     <input type="text" autocomplete="false" tabindex="-1"

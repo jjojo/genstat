@@ -7,8 +7,7 @@ export class StatisticsService {
 
 	constructor (private http: Http) {}
 
-	test = "hejsan hoppsan service här"
-	econData:Object;
+	econData = {};
 
 	getEconData(){
 		return Promise.resolve(this.econData);
@@ -21,7 +20,14 @@ export class StatisticsService {
              .catch(this.handleError);
 	}
 
-	fetchEconData(yrkesgrupp, years){
+	fetchEconData(yrkesgrupp, yearFrom, yearTo){
+		let years = [];
+		let i = 0;
+		while(years[years.length-1] !== yearTo){
+			years[i] = (parseInt(yearFrom) + i).toString();
+			i++; 
+		}
+		console.log(years)
 		let body = JSON.stringify({
 			  "query": [
 			    {
@@ -65,11 +71,12 @@ export class StatisticsService {
 			  }
 			});
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-
-		this.econData =  this.http.post('http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieYrke', body)
+		this.econData2.labels = ["nu", "ändras", "den"]
+		return this.econData = this.http.post('http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieYrke', body)
              .toPromise()
              .then(this.extractData)
              .catch(this.handleError);
+        
 	}
 
 

@@ -14,20 +14,14 @@ export class LineChartComponent implements OnInit{
   constructor(private statisticsService: StatisticsService) {
    
   }  
-
+  
   //@ViewChild(ChartComponent) chartComponent: ChartComponent;
-
-  ngOnInit():void{
-    
-  }
-
-  type = 'line';
-  data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+data = {
+    labels: ["feb","jan"],
     datasets: [
       {
-        label: "My First dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        label: "",
+        data: [],
         backgroundColor: 'rgba(247,183,51,0.8)',
         borderColor: 'rgba(247,183,51,1)',
         pointBackgroundColor: 'rgba(0,0,0,1)',
@@ -36,8 +30,8 @@ export class LineChartComponent implements OnInit{
         pointHoverBorderColor: 'rgba(252,74,26,0.8)'
       },
       {
-        label: "fem",
-        data: [28, 48, 40, 19, 86, 27, 90],
+        label: "",
+        data: [],
         backgroundColor: 'rgba(252,74,26,0.8)',
         borderColor: 'rgba(252,74,26,1)',
         pointBackgroundColor: 'rgba(0,0,0,1)',
@@ -52,7 +46,69 @@ export class LineChartComponent implements OnInit{
     maintainAspectRatio: false
   };
 
-  getData(){
+  ngOnInit():void{
+    this.data = {
+    labels: this.statisticsService.econData2.labels,
+    datasets: [
+      {
+        label: "",
+        data: [],
+        backgroundColor: 'rgba(247,183,51,0.8)',
+        borderColor: 'rgba(247,183,51,1)',
+        pointBackgroundColor: 'rgba(0,0,0,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,0.8)'
+      },
+      {
+        label: "",
+        data: [],
+        backgroundColor: 'rgba(252,74,26,0.8)',
+        borderColor: 'rgba(252,74,26,1)',
+        pointBackgroundColor: 'rgba(0,0,0,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,1)'
+      },
+    ]
+  };
+  }
+
+  type = 'line';
+  
+
+  // type = 'line';
+  // data = {
+  //   labels: [],
+  //   datasets: [
+  //     {
+  //       label: "",
+  //       data: [],
+  //       backgroundColor: 'rgba(247,183,51,0.8)',
+  //       borderColor: 'rgba(247,183,51,1)',
+  //       pointBackgroundColor: 'rgba(0,0,0,1)',
+  //       pointBorderColor: '#fff',
+  //       pointHoverBackgroundColor: '#fff',
+  //       pointHoverBorderColor: 'rgba(252,74,26,0.8)'
+  //     },
+  //     {
+  //       label: "",
+  //       data: [],
+  //       backgroundColor: 'rgba(252,74,26,0.8)',
+  //       borderColor: 'rgba(252,74,26,1)',
+  //       pointBackgroundColor: 'rgba(0,0,0,1)',
+  //       pointBorderColor: '#fff',
+  //       pointHoverBackgroundColor: '#fff',
+  //       pointHoverBorderColor: 'rgba(252,74,26,1)'
+  //     },
+  //   ]
+  // };
+  // options = {
+  //   responsive: true,
+  //   maintainAspectRatio: false
+  // };
+
+  public getData(){
     let t = this;
       this.statisticsService.getEconData().then(function(data) {
         console.log(data)
@@ -95,7 +151,6 @@ export class LineChartComponent implements OnInit{
           ]
         };
      })
-
   }
 
   // getData2(){

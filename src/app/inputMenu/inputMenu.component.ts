@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { StatisticsService } from '../services/statistics.service';
+import { LineChartComponent } from '../lineChart/line-chart'
+
 
 
 
@@ -11,6 +12,17 @@ import { StatisticsService } from '../services/statistics.service';
   styles: [String(require('./inputMenu.component.styl'))]
 })
 export class InputMenuComponent implements OnInit {
+
+  constructor(private statisticsService: StatisticsService) { 
+  }
+
+  //@ViewChild(LineChartComponent) lineChart: LineChartComponent;
+
+  options = {
+    workgroup: null,
+    yearFrom: null,
+    yearTo: null
+  }
   yrken = [];
   years = [];
   workgroup = {};
@@ -18,42 +30,44 @@ export class InputMenuComponent implements OnInit {
   yearTo = {};
   
 
-  // private _disabledV:string = '0';
-  // private disabled:boolean = false;
 
-  // private get disabledV():string {
-  //   return this._disabledV;
-  // }
+  refreshValue(value:any, type:any) {
+    if(type === "workgroup") this.options.workgroup = value;
+    if(type === "yearFrom") this.options.yearFrom = value;
+    if(type === "yearTo") this.options.yearTo = value;
+  }
 
-  // private set disabledV(value:string) {
-  //   this._disabledV = value;
-  //   this.disabled = this._disabledV === '1';
-  // }
+  disabled(){
+    if(this.options.workgroup === null || this.options.yearFrom === null) {
+      console.log("inne och disablar")
+      return true
+    }
+    else{
+      console.log("inne och Odisablar")
+      return false
+    }
+  }
 
-  // public selected(value:any):void {
-  //   console.log('Selected value is: ', value);
-  // }
 
-  // public removed(value:any):void {
-  //   console.log('Removed value is: ', value);
-  // }
-
-  // public typed(value:any):void {
-  //   console.log('New search input: ', value);
-  // }
-
-  public refreshValue(value:any, type:any):void {
-    if(type === "workgroup") this.workgroup = value;
-    if(type === "yearFrom") this.yearFrom = value;
-    if(type === "yearTo") this.yearTo = value;
+  getStatistics(){
+    console.log("test")
+    this.getOptions();
+    let retunData;
+    this.statisticsService
+      .fetchEconData(this.options.workgroup.id, 
+                      this.options.yearFrom.id, 
+                      this.options.yearTo.id)
+        .then(function(data) {
+          console.log(data)
+        })
+    
+    //returnData.then(data => console.log(data))
+    //console.log(returnData)
+    console.log(this.options.workgroup)
   }
 
 
 
-
-
-  constructor(private statisticsService: StatisticsService) { 
-  }
 
 
   ngOnInit():void{
@@ -78,10 +92,11 @@ export class InputMenuComponent implements OnInit {
           id:data.variables[0].values[i]}
       }
       for (var i = 0; i < data.variables[3].valueTexts.length; i++) {
-        t.years[i] = {text:data.variables[3].valueTexts[i],
+        t.years[i] = {text:data.variables[3].valueTexts[i].substring(0,24),
           id:data.variables[3].values[i]}
       }
     });
+
   }
 
   print(test){

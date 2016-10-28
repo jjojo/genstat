@@ -16,7 +16,11 @@ import { StatisticsComponent } from './app/statistics/statistics.component';
 import { MenuComponent } from './app/menu/menu.component';
 import { EconComponent } from './app/econ/econ.component';
 import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
+import { MissionControlComponent } from './app/missions/missioncontrol.component';
+import { NameChildComponent } from './app/missions/mission-child.component';
+import { AstronautComponent } from './app/missions/astronaut.component';
 
+import { MissionService } from './app/services/mission.service';
 import { StatisticsService } from './app/services/statistics.service';
 
 import { SelectComponent } from './app/components/select/select';
@@ -46,12 +50,16 @@ import { OffClickDirective } from './app/components/select/off-click';
   StatisticsComponent,
   SelectComponent,
   HighlightPipe,
-  OffClickDirective
+  OffClickDirective,
+  MissionControlComponent,
+  NameChildComponent,
+  AstronautComponent
   //StatisticsService
   ],
   bootstrap: [ MyApp ],
   providers : [
-  StatisticsService
+  StatisticsService,
+  MissionService
   ]
 })
 export class AppModule {}

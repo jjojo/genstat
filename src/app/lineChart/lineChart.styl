@@ -1,15 +1,12 @@
 @import 'jeet'
+@require '../../assets/css/variables'
 
-chart
+.wrapper
 	display	block
-	span(3/4)
-	min-height 100vh
-	background-color: #4abdac
-	position: absolute
-	bottom: 0
-	canvas
-		position: absolute
-		bottom: 0
+	span(1)
+	:host /deep/
+		canvas
+			min-height 70vh
 
 button
 	position: absolute

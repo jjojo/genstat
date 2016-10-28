@@ -2,33 +2,35 @@
 
 	<!-- MENU OPTIONS -->
 	<div>
-		<ng-select [allowClear]="true"
+		<my-nav></my-nav>
+		<obs-comp></obs-comp>
+		<ng-select class="ngSelect"
+			[allowClear]="true"
 			[items]="yrken"
 			(data)="refreshValue($event, 'workgroup')"
 			placeholder="Välj yrkesgrupp">
 		</ng-select>
 
-		<pre>{{workgroup.text}}</pre>
-		<pre>{{workgroup.id}}</pre>
-
-		<ng-select [allowClear]="true"
+		<ng-select class="ngSelect"
+			[allowClear]="true"
 			[items]="years"
 			(data)="refreshValue($event, 'yearFrom')"
 			placeholder="år från">
 		</ng-select>
 
-		<pre>{{yearFrom.text}}</pre>
-		<pre>{{yearFrom.id}}</pre>
-
-		<ng-select [allowClear]="true"
+		<ng-select class="ngSelect"
+			[allowClear]="true"
 			[items]="years"
 			(data)="refreshValue($event, 'yearTo')"
 			placeholder="år till">
 		</ng-select>
-
-		<pre>{{yearTo.text}}</pre>
-		<pre>{{yearTo.id}}</pre>
 		
+		<button 
+		(click)="getStatistics()" 
+		[disabled]="!options.workgroup || !options.yearTo || !options.yearFrom">
+			Hämta
+		</button>
+	</div>
 <!-- 
 
 
@@ -44,13 +46,6 @@ ORGINAL SPARAD FÖR ATT EVENTULLT BEHÖVER JAG DISABLED
 			placeholder="år från">
 		</ng-select> -->
 
-
-
-
-		<div>
-			<button (click)="getStatistics">Hämta statistik</button>
-		</div>
-	</div>
 
 		<!-- <form #f="ngForm">
 		      <select name="yrkesgrupp" ngModel required>

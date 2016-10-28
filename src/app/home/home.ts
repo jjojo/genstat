@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { Subject } from 'rxjs'
+import { StatisticsService } from '../services/statistics.service';
 
 @Component({
   selector: 'my-home',
@@ -8,10 +9,10 @@ import { Component } from '@angular/core';
 		<start></start>
 		<statistics></statistics>
 	</div>`,
-  styles: [String(require('./home.styl'))]
+  styles: [String(require('./home.styl'))],
+  providers: [ StatisticsService ]
 })
 export class Home {
-  constructor(){
-    console.log('In Home constructor');
-  }
+  constructor(private statisticsService: StatisticsService) {
+  } 
 }
