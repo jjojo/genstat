@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { StatisticsService } from '../services/statistics.service';
-import { LineChartComponent } from '../lineChart/line-chart'
-
-
 
 
 @Component({
@@ -16,6 +13,11 @@ export class InputMenuComponent implements OnInit {
   constructor(private statisticsService: StatisticsService) { 
   }
 
+  ngOnInit():void{
+    this.getOptions()
+  }
+
+  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
   //@ViewChild(LineChartComponent) lineChart: LineChartComponent;
 
   options = {
@@ -28,59 +30,24 @@ export class InputMenuComponent implements OnInit {
   workgroup = {};
   yearFrom = {};
   yearTo = {};
-  
-
 
   refreshValue(value:any, type:any) {
-    if(type === "workgroup") this.options.workgroup = value;
-    if(type === "yearFrom") this.options.yearFrom = value;
-    if(type === "yearTo") this.options.yearTo = value;
+    if(type === "workgroup") this.options.workgroup = value.id;
+    if(type === "yearFrom") this.options.yearFrom = parseInt(value.id);
+    if(type === "yearTo") this.options.yearTo = parseInt(value.id);
   }
-
-  disabled(){
-    if(this.options.workgroup === null || this.options.yearFrom === null) {
-      console.log("inne och disablar")
-      return true
-    }
-    else{
-      console.log("inne och Odisablar")
-      return false
-    }
-  }
-
 
   getStatistics(){
-    console.log("test")
-    this.getOptions();
-    let retunData;
+    let t = this;
     this.statisticsService
-      .fetchEconData(this.options.workgroup.id, 
-                      this.options.yearFrom.id, 
-                      this.options.yearTo.id)
+      .fetchEconData(this.options.workgroup, 
+                      this.options.yearFrom.toString(), 
+                      this.options.yearTo.toString())
         .then(function(data) {
-          console.log(data)
+          t.notify.emit('payload');
         })
-    
-    //returnData.then(data => console.log(data))
-    //console.log(returnData)
-    console.log(this.options.workgroup)
   }
 
-
-
-
-
-  ngOnInit():void{
-    this.getOptions()
-  }
-
-
-  // getData():void{
-  //   this.statisticsService.getStatistics().then(function(data){
-  //   console.log(data.data);
-  //   })
-  //   console.log(this.options)
-  // }
 
   getOptions():void{
     let t = this;
@@ -91,16 +58,12 @@ export class InputMenuComponent implements OnInit {
         t.yrken[i] = {text:data.variables[0].valueTexts[i],
           id:data.variables[0].values[i]}
       }
+      //Could be merged but if datadosent match it could result in errors
       for (var i = 0; i < data.variables[3].valueTexts.length; i++) {
         t.years[i] = {text:data.variables[3].valueTexts[i].substring(0,24),
           id:data.variables[3].values[i]}
       }
     });
-
-  }
-
-  print(test){
-    console.log(test)
   }
 
   // onSubmit(f: NgForm):void {

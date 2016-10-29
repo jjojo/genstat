@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { LineChartComponent } from '../lineChart/line-chart';
 
 
 @Component({
@@ -11,33 +12,9 @@ export class StatisticsComponent {
     console.log('In statistics constructor');
   }
 
-	items = [
-		{
-			name: "ekonomi",
-			iconUrl: "../../assets/img/pig-coin.svg",
-			text: "Hur skiljer sig..."
-		},
-		{
-			name: "hälsa",
-			iconUrl: "../../assets/img/health.svg",
-			text: "Hur skiljer sig..."
-		},
-		{
-			name: "inflytande",
-			iconUrl: "../../assets/img/tie.svg",
-			text: "Hur skiljer sig..."
-		},
-		{
-			name: "alkohol",
-			iconUrl: "../../assets/img/drink.svg",
-			text: "Hur skiljer sig..."
-		},
-		{
-			name: "familj",
-			iconUrl: "../../assets/img/fam.svg",
-			text: "Hur skiljer sig..."
-		}
-	]
+  @ViewChild(LineChartComponent) chart: LineChartComponent;
 
-
+  onNotify(message:string):void {
+    this.chart.getData()
+  }
 }

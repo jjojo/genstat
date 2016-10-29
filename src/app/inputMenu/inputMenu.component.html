@@ -2,8 +2,6 @@
 
 	<!-- MENU OPTIONS -->
 	<div>
-		<my-nav></my-nav>
-		<obs-comp></obs-comp>
 		<ng-select class="ngSelect"
 			[allowClear]="true"
 			[items]="yrken"
@@ -27,7 +25,21 @@
 		
 		<button 
 		(click)="getStatistics()" 
-		[disabled]="!options.workgroup || !options.yearTo || !options.yearFrom">
+		[disabled]="(
+		options.workgroup === null 
+		|| options.yearTo === null 
+		|| options.yearFrom === null 
+		|| options.yearFrom > options.yearTo)"
+		[ngClass]="{
+		'disabled': (!options.workgroup 
+		||!options.yearTo 
+		||!options.yearFrom
+		||options.yearFrom >= options.yearTo),
+		'active':(options.workgroup 
+		&& options.yearTo 
+		&& options.yearFrom
+		&& options.yearFrom <= options.yearTo
+		)}">
 			Hämta
 		</button>
 	</div>
