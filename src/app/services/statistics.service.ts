@@ -9,6 +9,36 @@ export class StatisticsService {
 
 	econData = {};
 
+	data = {
+    labels: ["feb","jan"],
+    datasets: [
+      {
+        label: "",
+        data: [],
+        backgroundColor: 'rgba(247,183,51,0.8)',
+        borderColor: 'rgba(247,183,51,1)',
+        pointBackgroundColor: 'rgba(0,0,0,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,0.8)'
+      },
+      {
+        label: "",
+        data: [],
+        backgroundColor: 'rgba(252,74,26,0.8)',
+        borderColor: 'rgba(252,74,26,1)',
+        pointBackgroundColor: 'rgba(0,0,0,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,1)'
+      },
+    ]
+  };
+
+	getData(){
+		return Promise.resolve(this.data)
+	}
+
 	getEconData(){
 		return Promise.resolve(this.econData);
 	}
@@ -71,7 +101,8 @@ export class StatisticsService {
 			  }
 			});
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-		this.econData2.labels = ["nu", "ändras", "den"]
+		//this.econData2.labels = ["nu", "ändras", "den"]
+		this.data.labels = ["jonas", "äger"]
 		return this.econData = this.http.post('http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieYrke', body)
              .toPromise()
              .then(this.extractData)

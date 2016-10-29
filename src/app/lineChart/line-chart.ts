@@ -12,12 +12,11 @@ import { StatisticsService } from '../services/statistics.service';
 export class LineChartComponent implements OnInit{
   // constructor to acess service
   constructor(private statisticsService: StatisticsService) {
-   
+   this.statisticsService.getData().then(data => this.data = data)
   }  
   
   //@ViewChild(ChartComponent) chartComponent: ChartComponent;
-data = {
-    labels: ["feb","jan"],
+  data = {labels: [],
     datasets: [
       {
         label: "",
@@ -39,39 +38,14 @@ data = {
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(252,74,26,1)'
       },
-    ]
-  };
+    ]}
   options = {
     responsive: true,
     maintainAspectRatio: false
   };
 
   ngOnInit():void{
-    this.data = {
-    labels: this.statisticsService.econData2.labels,
-    datasets: [
-      {
-        label: "",
-        data: [],
-        backgroundColor: 'rgba(247,183,51,0.8)',
-        borderColor: 'rgba(247,183,51,1)',
-        pointBackgroundColor: 'rgba(0,0,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(252,74,26,0.8)'
-      },
-      {
-        label: "",
-        data: [],
-        backgroundColor: 'rgba(252,74,26,0.8)',
-        borderColor: 'rgba(252,74,26,1)',
-        pointBackgroundColor: 'rgba(0,0,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(252,74,26,1)'
-      },
-    ]
-  };
+    
   }
 
   type = 'line';
