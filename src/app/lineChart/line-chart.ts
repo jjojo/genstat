@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { StatisticsService } from '../services/statistics.service';
 import { ChartModule } from 'angular2-chartjs';
 import { ChartComponent } from 'angular2-chartjs';
@@ -17,6 +17,8 @@ export class LineChartComponent {
     maintainAspectRatio: false
   };
 
+    @Input() myId : string;
+    @Input() bindModelData: any;
   //initial data
   data = {labels: [],
     datasets: [
@@ -43,13 +45,41 @@ export class LineChartComponent {
     ]
   }
 
+  data2 = {labels: [],
+    datasets: [
+      {
+        label: "JOnas",
+        data: [],
+        backgroundColor: 'rgba(247,183,51,0.8)',
+        borderColor: 'rgba(247,183,51,1)',
+        pointBackgroundColor: 'rgba(0,0,0,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,0.8)'
+      },
+      {
+        label: "män",
+        data: [],
+        backgroundColor: 'rgba(252,74,26,0.8)',
+        borderColor: 'rgba(252,74,26,1)',
+        pointBackgroundColor: 'rgba(0,0,0,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,1)'
+      },
+    ]
+  }
+
   //Grants access to the core chart object don't forget to att .chart so chartComponent.chart is the object!
   @ViewChild(ChartComponent) chartComponent: ChartComponent;
 
   //Constructor for statisticsService
-  constructor(private statisticsService: StatisticsService) {} 
+  constructor(private statisticsService: StatisticsService) {
+    console.log(this.bindModelData)
+  } 
   
   getData(){
+    console.log(this.bindModelData)
     let t = this;
       this.statisticsService.getEconData().then(function(data) {
        let years = [];

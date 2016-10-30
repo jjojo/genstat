@@ -1,13 +1,12 @@
-<div class="wrapper">
-	<h2>Subject</h2>
+<div *ngFor="let subject of info" class="wrapper">
+	<h2 [ngStyle]="{'color': subject.color}">{{subject.title}}</h2>
 
 	<div class="chart">
-		<line-chart></line-chart>
+		<line-chart [(bindModelData)]="testar"></line-chart>
 	</div>
 	<div class="get-statistics">
-		<h3>hämta statistik {{nextMission}}</h3>
+		<h3>hämta statistik </h3>
 		<input-menu (notify)="onNotify($event)"></input-menu>
-
 	</div>
 	
 </div>

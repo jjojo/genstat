@@ -10,16 +10,17 @@ export class StatisticsService {
 	econData = {};
 
 	subjects = {
-		econ:{
-			title: "ekonomi",
-			color: "rgba(120, 173, 181, 1)",
-			description:"Hur ser statistiken ut för kvinnors & mäns löner, besparingar och kapital?"
-		},
-		health:{
-			title: "hälsa",
-			color: "rgba(208, 134, 146, 1)",
-			description:"Hur ser statistiken ut för kvinnors & mäns hälsa, sjukdommar och stress?"
-		}
+		subjects:[{
+				title: "ekonomi",
+				color: "rgba(120, 173, 181, 1)",
+				description:"Hur ser statistiken ut för kvinnors & mäns löner, besparingar och kapital?"
+			},
+			{
+				title: "hälsa",
+				color: "rgba(208, 134, 146, 1)",
+				description:"Hur ser statistiken ut för kvinnors & mäns hälsa, sjukdommar och stress?"
+			}
+		]
 	}
 
 	getEconData(){
