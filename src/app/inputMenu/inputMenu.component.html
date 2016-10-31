@@ -1,7 +1,55 @@
 <div class="wrapper">
 
 	<!-- MENU OPTIONS -->
-	<div>
+	<div *ngIf="subject.subject === menu.subject" >
+		<h4>{{menu.title}}</h4>
+		<ng-select *ngFor="let option of menu.options" class="ngSelect"
+			[allowClear]="true"
+			[items]="option.items"
+			(data)="refreshValue($event, option.id)"
+			placeholder="{{option.placeholder}}">
+		</ng-select>
+
+		
+		<button 
+		*ngIf="subject.subject === 'econ'"
+		(click)="getStatistics()" 
+		[disabled]="(
+		options.workgroup === null 
+		|| options.yearTo === 0 
+		|| options.yearFrom === 0 
+		|| options.yearFrom > options.yearTo)"
+		[ngClass]="{
+		'disabled': (!options.workgroup 
+		||!options.yearTo 
+		||!options.yearFrom
+		||options.yearFrom >= options.yearTo),
+		'active':(options.workgroup 
+		&& options.yearTo 
+		&& options.yearFrom
+		&& options.yearFrom <= options.yearTo
+		)}">
+			Hämta {{subject.title}}
+		</button>
+
+		<button 
+		*ngIf="subject.subject !== 'econ'"
+		(click)="getStatistics()" 
+		[disabled]="(
+		options.workgroup === null
+		|| options.yearFrom === 0)"
+		[ngClass]="{
+		'disabled': (!options.workgroup  
+		||!options.yearFrom),
+		'active':(options.workgroup 
+		&& options.yearFrom
+		)}">
+			Hämta {{subject.title}}
+		</button>
+	</div>
+
+
+	<!-- <div *ngIf="subject.subject === preferences.subject" >
 		<ng-select class="ngSelect"
 			[allowClear]="true"
 			[items]="yrken"
@@ -40,9 +88,9 @@
 		&& options.yearFrom
 		&& options.yearFrom <= options.yearTo
 		)}">
-			Hämta
+			Hämta {{subject.title}}
 		</button>
-	</div>
+	</div> -->
 <!-- 
 
 

@@ -2,11 +2,16 @@
 	<h2 [ngStyle]="{'color': subject.color}">{{subject.title}}</h2>
 
 	<div class="chart">
-		<line-chart [(bindModelData)]="testar"></line-chart>
+		<line-chart [subject]="subject"></line-chart>
 	</div>
 	<div class="get-statistics">
 		<h3>hämta statistik </h3>
-		<input-menu (notify)="onNotify($event)"></input-menu>
+
+		<input-menu 
+		[subject]="subject"
+		(notify)="onNotify($event)">
+		</input-menu>
+
 	</div>
 	
 </div>

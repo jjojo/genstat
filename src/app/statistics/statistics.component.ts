@@ -1,4 +1,4 @@
-import { Component, ViewChildren } from '@angular/core';
+import { Component, ViewChildren, AfterViewInit } from '@angular/core';
 import { LineChartComponent } from '../lineChart/line-chart';
 import { StatisticsService } from '../services/statistics.service';
 
@@ -8,21 +8,34 @@ import { StatisticsService } from '../services/statistics.service';
   template: require('./statistics.component.html'),
   styles: [String(require('./statistics.component.styl'))]
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements AfterViewInit {
   info:Object;
-  constructor(private statisticsService:StatisticsService){
-  	this.info = this.statisticsService.subjects.subjects
-    console.log('In statistics constructor');
-  }
+  econ;
+  health;
+  chartChildren;
 
   @ViewChildren(LineChartComponent) charts: LineChartComponent;
 
-  onNotify(message):void {
-  	console.log(this.charts)
-  	let econ = this.charts._results[0]
-  	let health = this.charts._results[1]
-    econ.getData()
-    health.getData()
+  constructor(private statisticsService:StatisticsService){
+  	this.info = this.statisticsService.subjects.subjects
+    
+    
+  }
+
+  ngAfterViewInit(){
+  		this.chartChildren = this.charts['_results']
+  		this.econ = this.charts['_results'][0]
+  		this.health = this.charts['_results'][1]
+  	}
+
+  onNotify(subjectNr):void {
+  	//console.log(this.charts)
+  	//console.log(message)
+  	//console.log(subjectNr)
+	this.chartChildren[subjectNr].getData()  	
+
+    //this.econ.getData()
+    //this.health.getData()
   }
 
 }

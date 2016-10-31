@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StatisticsService } from '../services/statistics.service';
 
 
 @Component({
@@ -7,8 +8,10 @@ import { Component } from '@angular/core';
   styles: [String(require('./start.component.styl'))]
 })
 export class StartComponent {
-  constructor(){
-    console.log('In Home constructor');
+	info;
+  constructor(private statisticsService: StatisticsService){
+  	this.info = statisticsService.subjects.subjects
+    console.log('In start constructor');
   }
 
 	items = [

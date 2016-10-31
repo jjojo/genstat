@@ -11,15 +11,51 @@ import { ChartComponent } from 'angular2-chartjs';
 })
 export class LineChartComponent {
   // Configuration for chart
-  type = 'line'
-  options = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
+  @Input() subject: Object;
+  type;
+  options;
+  ngOnInit(){
 
-    @Input() myId : string;
-    @Input() bindModelData: any;
-  //initial data
+    
+    /*
+      Options should be defined in each subjects service
+      if to start from zero, etc
+    */
+
+
+    //Quiq-fix för att prova bar-chart
+    if(this.subject['subject'] === "health" || this.subject['subject'] === "drugs") {
+      this.type = 'bar'
+      this. options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 100,
+                    min: 0,
+                }
+            }]
+        }
+      }
+    }else{
+      this.type = 'line'
+      this. options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false
+                }
+            }]
+        }
+      }
+    }
+
+  }
+  
+  //initial data for charts
   data = {labels: [],
     datasets: [
       {
@@ -27,8 +63,10 @@ export class LineChartComponent {
         data: [],
         backgroundColor: 'rgba(247,183,51,0.8)',
         borderColor: 'rgba(247,183,51,1)',
-        pointBackgroundColor: 'rgba(0,0,0,1)',
-        pointBorderColor: '#fff',
+        pointBackgroundColor: '#4c4c4c',
+        pointBorderColor: '#f2f2f2',
+        pointRadius: 4,
+        pointBorderWidth: 2,
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(252,74,26,0.8)'
       },
@@ -37,68 +75,49 @@ export class LineChartComponent {
         data: [],
         backgroundColor: 'rgba(252,74,26,0.8)',
         borderColor: 'rgba(252,74,26,1)',
-        pointBackgroundColor: 'rgba(0,0,0,1)',
-        pointBorderColor: '#fff',
+        pointBackgroundColor: '#4c4c4c',
+        pointBorderColor: '#f2f2f2',
+        pointRadius: 4,
+        pointBorderWidth: 2,
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(252,74,26,1)'
       },
     ]
   }
 
-  data2 = {labels: [],
-    datasets: [
-      {
-        label: "JOnas",
-        data: [],
-        backgroundColor: 'rgba(247,183,51,0.8)',
-        borderColor: 'rgba(247,183,51,1)',
-        pointBackgroundColor: 'rgba(0,0,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(252,74,26,0.8)'
-      },
-      {
-        label: "män",
-        data: [],
-        backgroundColor: 'rgba(252,74,26,0.8)',
-        borderColor: 'rgba(252,74,26,1)',
-        pointBackgroundColor: 'rgba(0,0,0,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(252,74,26,1)'
-      },
-    ]
-  }
-
-  //Grants access to the core chart object don't forget to att .chart so chartComponent.chart is the object!
+  
+  /*
+      Grants access to the core chart object don't forget
+      to add .chart so chartComponent.chart is the object!
+  */
   @ViewChild(ChartComponent) chartComponent: ChartComponent;
 
-  //Constructor for statisticsService
-  constructor(private statisticsService: StatisticsService) {
-    console.log(this.bindModelData)
-  } 
+  /*
+      Constructor for statisticsService
+  */
+  constructor(private statisticsService: StatisticsService) { } 
   
+  /*
+      Gets data from statistics service. Function tells 
+      which subject it is an instance of and recieves
+      relevant data for the chart.
+  */
   getData(){
-    console.log(this.bindModelData)
     let t = this;
-      this.statisticsService.getEconData().then(function(data) {
-       let years = [];
-       let valuesM = [];
-       let valuesF = [];
-       for (var i = 0; i < data['data'].length/2; ++i) {
-           years[i] = data['data'][i].key[2]
-           if(data['data'][i].key[1] === "1") {
-             valuesM[i] = data['data'][i].values[0]
-           }
-           if(data['data'][data['data'].length/2 + i].key[1] === "2") {
-             valuesF[i] = data['data'][data['data'].length/2 + i].values[0]
-           }
-        }
-        console.log(data)
-        t.data.labels = years
-        t.data.datasets[0].data = valuesF
-        t.data.datasets[1].data = valuesM
-        t.chartComponent.chart.update();
-     })
+    this.statisticsService.getData(this.subject['subject']).then(function(data) {
+      // labels, displayed in the x-axis of chart
+      t.data.labels = data['labels']
+      // first dataset is female data, results in graphics 'in-front'
+      t.data.datasets[0].data = data['femaleData']
+      // second dataset is male data, results in graphics 'behind'
+      t.data.datasets[1].data = data['maleData']
+      
+      // reverse order of datasets so minority (male data) is in front on the graph
+      if(t.subject['subject'] === "family") {
+        t.data.datasets.reverse()
+      }
+      // updates and redraws chart
+      t.chartComponent.chart.update();
+   })
   }
 }

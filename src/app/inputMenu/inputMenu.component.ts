@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { StatisticsService } from '../services/statistics.service';
 
@@ -9,96 +9,89 @@ import { StatisticsService } from '../services/statistics.service';
   styles: [String(require('./inputMenu.component.styl'))]
 })
 export class InputMenuComponent implements OnInit {
-
-  constructor(private statisticsService: StatisticsService) { 
-  }
-
-  ngOnInit():void{
-    this.getOptions()
-  }
-
+  //Input from parent component, statistics.component.ts
+  @Input() subject: Object;
+  //Output from child to parent through an eventemitter
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
-  //@ViewChild(LineChartComponent) lineChart: LineChartComponent;
-
+  
+  /*
+    values from selections is stored
+    in options-object. This archetecture
+    needs a remake!
+  */
   options = {
     workgroup: null,
-    yearFrom: null,
-    yearTo: null
+    yearFrom: 0,
+    yearTo: 0
   }
-  yrken = [];
-  years = [];
+  //initialisation of value-variables (NOT GOOD SYSTEM)
   workgroup = {};
   yearFrom = {};
   yearTo = {};
 
-  refreshValue(value:any, type:any) {
-    if(type === "workgroup") this.options.workgroup = value.id;
-    if(type === "yearFrom") this.options.yearFrom = parseInt(value.id);
-    if(type === "yearTo") this.options.yearTo = parseInt(value.id);
+  menu:Object = {};
+  
+
+  constructor(private statisticsService: StatisticsService) { 
   }
 
+  /*
+    fetches menu options on initialisation
+  */
+  ngOnInit():void{
+    this.getOptions()
+  }
+
+  /*
+    refreches values of selected options
+    needs a remake as well!
+  */
+  refreshValue(value:any, type:any) {
+    if(this.subject['subject'] == "econ") {
+      if(type === "workgroup") this.options.workgroup = value.id;
+      if(type === "yearFrom") this.options.yearFrom = parseInt(value.id);
+      if(type === "yearTo") this.options.yearTo = parseInt(value.id);
+    }
+    else{
+      if(type === "workgroup") this.options.workgroup = value.id;
+      if(type === "yearFrom") this.options.yearFrom = value.id;
+      if(type === "yearTo") this.options.yearTo = value.id;
+    } 
+  }
+
+  /*
+    Tells service to get data depending on 
+    selected options. When data is resolved
+    tell chart to update via parent component,
+    statistics.component.ts
+  */
   getStatistics(){
     let t = this;
     this.statisticsService
-      .fetchEconData(this.options.workgroup, 
-                      this.options.yearFrom.toString(), 
-                      this.options.yearTo.toString())
-        .then(function(data) {
-          t.notify.emit('payload');
-        })
+      .fetchData([
+        this.options.workgroup, 
+        this.options.yearFrom.toString(), 
+        this.options.yearTo.toString()],
+        this.subject['subject'])
+          .then(function(data) {
+            t.notify.emit(t.subject['subjectNr']);
+          })
   }
 
-
+  /*
+    fetches menu options from statistics service,
+    sends which subject and url to SCB,
+    recives options for spesific table
+  */
   getOptions():void{
     let t = this;
-    this.statisticsService.getOptions().then(function(data){
-      t.yrken = [];
-      t.years = [];
-      for (var i = 0; i < data.variables[0].valueTexts.length; i++) {
-        t.yrken[i] = {text:data.variables[0].valueTexts[i],
-          id:data.variables[0].values[i]}
-      }
-      //Could be merged but if datadosent match it could result in errors
-      for (var i = 0; i < data.variables[3].valueTexts.length; i++) {
-        t.years[i] = {text:data.variables[3].valueTexts[i].substring(0,24),
-          id:data.variables[3].values[i]}
-      }
-    });
+    this.statisticsService
+      .getOptions(
+        this.subject['subject'], 
+        this.subject['optionsUrl'])
+          .then(function(data){
+            t.menu = data
+          })
   }
-
-  // onSubmit(f: NgForm):void {
-  //   //console.log(this.options.variables[0].values[f.value.yrkesgrupp.index])
-  //   //console.log(this.options.variables[0].values[f.value.yearFrom.index])
-  //   //console.log(this.options.variables[0].values[f.value.yearTo.index])
-    
-  //   let yearsList = [f.value.yearFrom.year];
-  //   let i = 1;
-  //   while(yearsList[yearsList.length-1] !== f.value.yearTo.year){
-  //      yearsList[i] = (parseInt(f.value.yearFrom.year) + i).toString();
-  //      i++; 
-  //   }
-  //   //let yrkesgrupp = this.options.variables[0].values[f.value.yrkesgrupp.index];
-
-  //   this.statisticsService.fetchEconData(yrkesgrupp, yearsList)
-
-
-  //   //console.log(yearsList)
-
-  //   //console.log(f.value.yrkesgrupp);
-  //   //console.log(f.value.yearFrom.year);
-  //   //console.log(f.value.yearTo.year);
-  //   //console.log(this.options)
-  // }
-
-
-
-
-
-
-
-
-
-
-
 
 }

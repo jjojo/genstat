@@ -6,10 +6,10 @@
 	</object>
 	
 	<div class="subjects">
-		<div *ngFor="let item of items" class="subject">
-			<h3>{{ item.name }}</h3>
-			<img src="{{item.iconUrl}}"/>
-			<p>{{ item.text }}</p>
+		<div *ngFor="let subject of info" class="subject">
+			<h3>{{ subject.title }}</h3>
+			<img src="{{subject.iconUrl}}"/>
+			<p>{{ subject.description }}</p>
 		</div>
 	</div>
 	
