@@ -1,44 +1,65 @@
 @import 'jeet'
+@require '../../assets/css/variables'
 
-//Should be moved into master-css file
-h2
-	font-weight 400
-	font-size 2.0em
-	color white
-	margin: 0
-	padding: 15px
+
+.wrapper
+	center(100%, pad:5%)
+	color light-grey
 	
-ul
-	list-style: none
-	padding: 0
-	margin: 0
+	.ngSelect
+		font-size 1.6em
+	
+	h4
+		margin: 25px 0px
+		text-align: center
 
-li
-	for row in 1 2 3 4 5
-		&:nth-child({row})
-			border-bottom 2px solid #eee
-			&:hover
-				background-color #368779
-				cursor: pointer
+	.disabled
+			background-color: transparent !important
+	.active
+		background-color: econ-blue
+		color white
 
-a 
-	text-decoration: none
-
-p 
-	color white
-
-.input-menu
-	top: 0;
-	position: absolute;
-	right: 0;
-	bottom 0
-	span(1/4)
-	min-height: 100%;
-	background-color: #000
-	float right
-	box-shadow: 2px 0px 5px 2px black;
-	-webkit-transition: width 1s ease; /* For Safari 3.1 to 6.0 */
-	transition: width 1s ease;
-
-.min-menu
-	width 5%
+	button
+		center()
+		margin-top: 15%
+		border-radius 5px
+		font-size 1.6em
+		padding 5px 25px
+		
+		
+	:host /deep/ 
+		input
+			width: 100%
+			height: auto
+			font-size 1em
+			
+		.form-control
+			height: auto
+			background-color: transparent
+			box-shadow none
+			border-width 2px 
+			border-style solid
+			border-radius 5px
+			
+		.ui-select-container
+			margin-bottom: 30px
+			
+		.ui-select-placeholder
+			font-size 1.6em
+			
+		.ui-select-match-text
+			font-size 1.6em
+			
+		.ui-select-choices-row 
+			a
+				white-space: normal !important
+				
+		.text-muted
+			color light-grey
+			
+		.menu-arrow
+			width 30px
+			margin 7px
+			position: absolute
+			right 10px
+			z-index: -1

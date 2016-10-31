@@ -4,16 +4,37 @@ import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms';
 
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { ChartModule } from 'angular2-chartjs';
 import { LineChartComponent } from './app/lineChart/line-chart';
 
 import { ROUTING } from './app.routing.ts';
 import { MyApp } from './app/app';
+
 import { About } from './app/about/about';
 import { Home } from './app/home/home';
+
+import { StartComponent } from './app/start/start.component';
+import { StatisticsComponent } from './app/statistics/statistics.component';
 import { MenuComponent } from './app/menu/menu.component';
+
 import { EconComponent } from './app/econ/econ.component';
+
 import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
+import { MissionControlComponent } from './app/missions/missioncontrol.component';
+import { NameChildComponent } from './app/missions/mission-child.component';
+import { AstronautComponent } from './app/missions/astronaut.component';
+
+import { MissionService } from './app/services/mission.service';
+import { StatisticsService } from './app/services/statistics.service';
+import { EconService } from './app/services/econ.service';
+import { HealthService } from './app/services/health.service';
+import { PowerService } from './app/services/power.service';
+import { DrugsService } from './app/services/drugs.service';
+import { FamilyService } from './app/services/family.service';
+
+import { SelectComponent } from './app/components/select/select';
+import { HighlightPipe } from './app/components/select/select-pipes';
+import { OffClickDirective } from './app/components/select/off-click';
 
 
 //declare alll dependencies and libs the app uses
@@ -23,8 +44,8 @@ import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
   BrowserModule,
   HttpModule,
   ROUTING,
-  ChartsModule,
-  FormsModule
+  ChartModule,
+  FormsModule,
   ],
   declarations: [ 
   MyApp, 
@@ -33,8 +54,26 @@ import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
   LineChartComponent,
   MenuComponent,
   EconComponent,
-  InputMenuComponent
+  InputMenuComponent,
+  StartComponent,
+  StatisticsComponent,
+  SelectComponent,
+  HighlightPipe,
+  OffClickDirective,
+  MissionControlComponent,
+  NameChildComponent,
+  AstronautComponent
+  //StatisticsService
   ],
-  bootstrap: [ MyApp ]
+  bootstrap: [ MyApp ],
+  providers : [
+  StatisticsService,
+  MissionService,
+  EconService,
+  HealthService,
+  PowerService,
+  DrugsService,
+  FamilyService
+  ]
 })
 export class AppModule {}

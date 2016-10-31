@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-
-// webpack html imports
-let template = require('./line-chart.html');
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { StatisticsService } from '../services/statistics.service';
+import { ChartModule } from 'angular2-chartjs';
+import { ChartComponent } from 'angular2-chartjs';
 
 @Component({
   selector: 'line-chart',
@@ -10,57 +10,114 @@ let template = require('./line-chart.html');
 
 })
 export class LineChartComponent {
-  // lineChart
+  // Configuration for chart
+  @Input() subject: Object;
+  type;
+  options;
+  ngOnInit(){
 
-  // lineChartData specifies the style and dataset for the graph
-  public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', pointRadius: 6},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
+    
+    /*
+      Options should be defined in each subjects service
+      if to start from zero, etc
+    */
 
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions:any = {
-    animation: false,
-    responsive: true
-  };
-  public lineChartColors:Array<any> = [
-    { // dark orange
-      backgroundColor: 'rgba(252,74,26,0.8)',
-      borderColor: 'rgba(252,74,26,1)',
-      pointBackgroundColor: 'rgba(247,183,51,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(252,74,26,0.8)'
-    },
-    { // lighter orange
-      backgroundColor: 'rgba(252,74,26,0.65)',
-      borderColor: 'rgba(252,74,26,1)',
-      pointBackgroundColor: 'rgba(247,183,51,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(252,74,26,1)'
-    },
-  ];
-  public lineChart:boolean = true;
-  public lineChartType:string = 'line';
 
-  // public randomize():void {
-  //   let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-  //   for (let i = 0; i < this.lineChartData.length; i++) {
-  //     _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-  //     for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-  //       _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-  //     }
-  //   }
-  //   this.lineChartData = _lineChartData;
-  // }
+    //Quiq-fix för att prova bar-chart
+    if(this.subject['subject'] === "health" || this.subject['subject'] === "drugs") {
+      this.type = 'bar'
+      this. options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 100,
+                    min: 0,
+                }
+            }]
+        }
+      }
+    }else{
+      this.type = 'line'
+      this. options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false
+                }
+            }]
+        }
+      }
+    }
 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
+  }
+  
+  //initial data for charts
+  data = {labels: [],
+    datasets: [
+      {
+        label: "kvinnor",
+        data: [],
+        backgroundColor: 'rgba(247,183,51,0.8)',
+        borderColor: 'rgba(247,183,51,1)',
+        pointBackgroundColor: '#4c4c4c',
+        pointBorderColor: '#f2f2f2',
+        pointRadius: 4,
+        pointBorderWidth: 2,
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,0.8)'
+      },
+      {
+        label: "män",
+        data: [],
+        backgroundColor: 'rgba(252,74,26,0.8)',
+        borderColor: 'rgba(252,74,26,1)',
+        pointBackgroundColor: '#4c4c4c',
+        pointBorderColor: '#f2f2f2',
+        pointRadius: 4,
+        pointBorderWidth: 2,
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(252,74,26,1)'
+      },
+    ]
   }
 
-  public chartHovered(e:any):void {
-    console.log(e);
+  
+  /*
+      Grants access to the core chart object don't forget
+      to add .chart so chartComponent.chart is the object!
+  */
+  @ViewChild(ChartComponent) chartComponent: ChartComponent;
+
+  /*
+      Constructor for statisticsService
+  */
+  constructor(private statisticsService: StatisticsService) { } 
+  
+  /*
+      Gets data from statistics service. Function tells 
+      which subject it is an instance of and recieves
+      relevant data for the chart.
+  */
+  getData(){
+    let t = this;
+    this.statisticsService.getData(this.subject['subject']).then(function(data) {
+      // labels, displayed in the x-axis of chart
+      t.data.labels = data['labels']
+      // first dataset is female data, results in graphics 'in-front'
+      t.data.datasets[0].data = data['femaleData']
+      // second dataset is male data, results in graphics 'behind'
+      t.data.datasets[1].data = data['maleData']
+      
+      // reverse order of datasets so minority (male data) is in front on the graph
+      if(t.subject['subject'] === "family") {
+        t.data.datasets.reverse()
+      }
+      // updates and redraws chart
+      t.chartComponent.chart.update();
+   })
   }
 }

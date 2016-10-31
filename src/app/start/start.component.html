@@ -1,0 +1,16 @@
+<div class="wrapper">
+	<h1>kvinnor & män</h1>
+
+	<object type="image/svg+xml" data="../../assets/img/logo.svg">
+  		<img src="../../assets/img/logo.png" />
+	</object>
+	
+	<div class="subjects">
+		<div *ngFor="let subject of info" class="subject">
+			<h3>{{ subject.title }}</h3>
+			<img src="{{subject.iconUrl}}"/>
+			<p>{{ subject.description }}</p>
+		</div>
+	</div>
+	
+</div>

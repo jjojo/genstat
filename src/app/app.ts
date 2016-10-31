@@ -8,9 +8,9 @@ import { About } from './about/about';
     <!-- <div>
       <a [routerLink]="['/']">Home</a>
       <a [routerLink]="['/about']">About</a>
-    </div> -->
-    <input-menu></input-menu>
-    <menu></menu>
+    </div> 
+    <input-menu></input-menu> 
+    <menu></menu>-->
     <div>
       <router-outlet></router-outlet>
     </div>

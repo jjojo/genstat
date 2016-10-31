@@ -1,23 +1,142 @@
-<div [ngClass]="'input-menu'">
-
-	<!-- BRAND/HOME link -->
-	<a [routerLink]="['/']"
-	(click)="menu = 'menu'">
-		<h2>HEM</h2>
-	</a>
+<div class="wrapper">
 
 	<!-- MENU OPTIONS -->
-	<ul>
-		<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-      		<input name="first" ngModel required #first="ngModel">
-      		<input name="last" ngModel>
-      		<button>Submit</button>
-    	</form>
-	</ul>
+	<div *ngIf="subject.subject === menu.subject" >
+		<h4>{{menu.title}}</h4>
+		<ng-select *ngFor="let option of menu.options" class="ngSelect"
+			[allowClear]="true"
+			[items]="option.items"
+			(data)="refreshValue($event, option.id)"
+			placeholder="{{option.placeholder}}">
+		</ng-select>
 
-	<p>First name value: {{ first.value }}</p>
-    <p>First name valid: {{ first.valid }}</p>
-    <p>Form value: {{ f.value | json }}</p>
-    <p>Form valid: {{ f.valid }}</p>
+		
+		<button 
+		*ngIf="subject.subject === 'econ'"
+		(click)="getStatistics()" 
+		[disabled]="(
+		options.workgroup === null 
+		|| options.yearTo === 0 
+		|| options.yearFrom === 0 
+		|| options.yearFrom > options.yearTo)"
+		[ngClass]="{
+		'disabled': (!options.workgroup 
+		||!options.yearTo 
+		||!options.yearFrom
+		||options.yearFrom >= options.yearTo),
+		'active':(options.workgroup 
+		&& options.yearTo 
+		&& options.yearFrom
+		&& options.yearFrom <= options.yearTo
+		)}">
+			Hämta {{subject.title}}
+		</button>
+
+		<button 
+		*ngIf="subject.subject !== 'econ'"
+		(click)="getStatistics()" 
+		[disabled]="(
+		options.workgroup === null
+		|| options.yearFrom === 0)"
+		[ngClass]="{
+		'disabled': (!options.workgroup  
+		||!options.yearFrom),
+		'active':(options.workgroup 
+		&& options.yearFrom
+		)}">
+			Hämta {{subject.title}}
+		</button>
+	</div>
+
+
+	<!-- <div *ngIf="subject.subject === preferences.subject" >
+		<ng-select class="ngSelect"
+			[allowClear]="true"
+			[items]="yrken"
+			(data)="refreshValue($event, 'workgroup')"
+			placeholder="Välj yrkesgrupp">
+		</ng-select>
+
+		<ng-select class="ngSelect"
+			[allowClear]="true"
+			[items]="years"
+			(data)="refreshValue($event, 'yearFrom')"
+			placeholder="år från">
+		</ng-select>
+
+		<ng-select class="ngSelect"
+			[allowClear]="true"
+			[items]="years"
+			(data)="refreshValue($event, 'yearTo')"
+			placeholder="år till">
+		</ng-select>
+		
+		<button 
+		(click)="getStatistics()" 
+		[disabled]="(
+		options.workgroup === null 
+		|| options.yearTo === null 
+		|| options.yearFrom === null 
+		|| options.yearFrom > options.yearTo)"
+		[ngClass]="{
+		'disabled': (!options.workgroup 
+		||!options.yearTo 
+		||!options.yearFrom
+		||options.yearFrom >= options.yearTo),
+		'active':(options.workgroup 
+		&& options.yearTo 
+		&& options.yearFrom
+		&& options.yearFrom <= options.yearTo
+		)}">
+			Hämta {{subject.title}}
+		</button>
+	</div> -->
+<!-- 
+
+
+ORGINAL SPARAD FÖR ATT EVENTULLT BEHÖVER JAG DISABLED
+
+<ng-select [allowClear]="true"
+			[items]="years"
+			[disabled]="disabled"
+			(data)="refreshValue($event, 'yearFrom')"
+			(selected)="selected($event)"
+			(removed)="removed($event)"
+			(typed)="typed($event)"
+			placeholder="år från">
+		</ng-select> -->
+
+
+		<!-- <form #f="ngForm">
+		      <select name="yrkesgrupp" ngModel required>
+		        <option value="" disabled>yrkesgrupp</option>
+		        <option *ngFor="let yrke of yrken let ind = index" [ngValue]="{'yrke':yrke, 'index':ind}">
+		          {{ yrke }}
+		        </option>
+		      </select>
+
+		      <select name="yearFrom" #yearFrom="ngModel" ngModel required>
+		        <option value="0" disabled>År från</option>
+		        <option *ngFor="let year of years let i = index" [ngValue]="{'year':year, 'index':i}">
+		          {{ year }}
+		        </option>
+		      </select>
+
+		      <select name="yearTo" #yearTo="ngModel" ngModel required>
+		        <option value="0" disabled>År till</option>
+		        <option *ngFor="let year of years | slice:yearFrom.viewModel.index let j = index" [ngValue]="{'year':year, 'index':j}">
+		          {{ year }}
+		        </option>
+		      </select>
+
+		      <button (click)='onSubmit(f)'>submit</button>
+
+		</form> -->
+
+
+
+     <!-- <p>Form value: {{ f.value | json }}</p>
+     <p>Form value: {{ yearFrom.viewModel.index }}</p>
+     <p>To value: {{ yearTo.viewModel.index }}</p> -->
 
 </div>
