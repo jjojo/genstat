@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+<path fill="#4C4C4D" d="M-96.536,178.882c-0.647-4.297-2.375-8.248-4.913-11.562l5.713-5.708l-5.129-5.129l-5.758,5.755
+	c-3.317-2.443-7.243-4.104-11.514-4.73v-8.167h-7.255v8.125c-4.315,0.579-8.281,2.216-11.641,4.643l-5.623-5.619l-5.13,5.13
+	l5.528,5.53c-2.605,3.354-4.376,7.354-5.039,11.73h-7.641v0.01h-0.004v7.259h7.597c0.61,4.411,2.362,8.468,4.954,11.858
+	l-5.396,5.394l5.133,5.132l5.439-5.439c3.396,2.496,7.43,4.192,11.824,4.777v7.827h7.255v-7.867
+	c4.352-0.642,8.343-2.353,11.696-4.868l5.575,5.576l5.129-5.132l-5.574-5.577c2.521-3.354,4.224-7.343,4.821-11.681h7.901v-0.013
+	h0.005v-7.254H-96.536z M-121.842,195.82c-7.35,0-13.305-5.952-13.305-13.308c0-7.344,5.955-13.305,13.305-13.305
+	c7.353,0,13.309,5.961,13.309,13.305C-108.533,189.868-114.489,195.82-121.842,195.82z"/>
+<text transform="matrix(1 0 0 1 44.6689 67.5811)" fill="#949494" font-family="'Raleway-Bold'" font-size="30">Beta 0.1.0b</text>
+<g>
+	<rect x="-12.518" y="85.939" fill="none" width="240.201" height="80.402"/>
+	<text transform="matrix(1 0 0 1 -12.5176 93.9692)"><tspan x="0" y="0" fill="#949494" font-family="'Raleway-MediumItalic'" font-size="11" letter-spacing="55">	</tspan><tspan x="58.549" y="0" fill="#949494" font-family="'Raleway-MediumItalic'" font-size="11">verisionsbeskrivning:</tspan><tspan x="0" y="13.2" fill="#949494" font-family="'Raleway-Medium'" font-size="11" letter-spacing="55">	</tspan><tspan x="58.549" y="13.2" fill="#949494" font-family="'Raleway-Medium'" font-size="11">0.0.1a   - första alphaverision</tspan><tspan x="0" y="26.4" fill="#949494" font-family="'Raleway-Medium'" font-size="11" letter-spacing="55">	</tspan><tspan x="58.549" y="26.4" fill="#949494" font-family="'Raleway-Medium'" font-size="11">0.1.0b   - första betaverision</tspan><tspan x="0" y="39.6" fill="#949494" font-family="'Raleway-Medium'" font-size="11" letter-spacing="55">	</tspan><tspan x="58.549" y="39.6" fill="#949494" font-family="'Raleway-Medium'" font-size="11">1.0.0   </tspan><tspan x="89.8" y="39.6" fill="#949494" font-family="'Raleway-Medium'" font-size="5"> </tspan><tspan x="91.065" y="39.6" fill="#949494" font-family="'Raleway-Medium'" font-size="11">  - första fullverision</tspan></text>
+</g>
+</svg>

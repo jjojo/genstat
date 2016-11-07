@@ -1,30 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StatisticsService } from '../services/statistics.service';
+import { __platform_browser_private__, SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'menu',
   template: require('./menu.component.html'),
   styles: [String(require('./menu.component.styl'))],
-  providers: [StatisticsService]
+  providers: [StatisticsService, __platform_browser_private__.BROWSER_SANITIZATION_PROVIDERS]
 })
 export class MenuComponent {
-
-  //test2 =  this.statisticsService.test
-  menu = 'menu';
-  //let data = {};
-
-  minify():void {
-    this.menu = 'menu min-menu'
+  @Input() subject: Object;
+  iconUrl;
+  info;
+  constructor(private statisticsService: StatisticsService,
+    private sanitizer: DomSanitizer){
+    this.info = statisticsService.subjects.subjects
   }
 
-  menuOptions: Object[] = [
-    {title: "Ekonomi", link: 'econ'},
-    {title: "Maktpositioner", link: 'power'},
-    {title: "Alkohol", link: 'drugs'},
-    {title: "Familj", link: 'family'},
-    {title: "Hälsa", link: 'health'}
-  ];
+  secureUrl(url){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
-
+  activeSrc(sub){
+    //console.log(this.subject['subject'])
+    if(this.subject['subject'] === sub['subject']) {
+      return this.subject['iconUrl'] + "_active.svg"
+    }else{
+      return sub.iconUrl + "_inactive.svg"
+    }
+  }
+  
 
 }

@@ -17,14 +17,33 @@
 		center(100%,pad:5%)
 		width: 30vw
 		margin-bottom: 7vh
+	
+	.version-tag
+		position: absolute
+		left:0
+		top 0
+		padding: 0 10% 0 0
+		margin: 0
 		
 	.subjects
 		center(100%,pad:5%)
 		text-align: center
 	
 	.subject
+		height: 40vh;
+		min-height: 300px;
+		border: 1px solid #d2d2d2;
+		box-shadow: 7px 7px 10px -11px black;
+		border-radius: 4px;
+		background-color: white;
 		
-		col(1/5, gutter: .5)
+		col(1/5, gutter: 1.5)
+
+		color light-grey
+		&:hover
+			text-decoration: none
+			color light-grey
+			cursor: pointer
 		p
 			margin: 0px 30px
 		h3

@@ -6,7 +6,6 @@ import 'rxjs/add/operator/toPromise';
 export class EconService {
 
 	constructor (private http: Http) {}
-	url = 'http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieYrke'
 	econData:Object;
 
 	getEconData(){
@@ -37,7 +36,7 @@ export class EconService {
 				options: [
 					{
 						items: yrken,
-						placeholder: "Välj yrkesgrupp",
+						placeholder: "utbilgningsgrupp",
 						id: "workgroup"
 					},
 					{
@@ -54,53 +53,52 @@ export class EconService {
 				}
 	}
 
-	fetchEconData(yrkesgrupp, yearFrom, yearTo){
-		console.log(yrkesgrupp + yearFrom + yearTo)
+	fetchEconData(utbildningsgrupp, yearFrom, yearTo, url){
 		let years = this.calcYears(yearFrom, yearTo)
 		let body = JSON.stringify({
-			  "query": [
-			    {
-			      "code": "Yrkesgrupp",
-			      "selection": {
-			        "filter": "item",
-			        "values": [
-			          yrkesgrupp
-			        ]
-			      }
-			    },
-			    {
-			      "code": "Kon",
-			      "selection": {
-			        "filter": "item",
-			        "values": [
-			          "1",
-			          "2"
-			        ]
-			      }
-			    },
-			    {
-			      "code": "ContentsCode",
-			      "selection": {
-			        "filter": "item",
-			        "values": [
-			          "AM0112A1"
-			        ]
-			      }
-			    },
-			    {
-			      "code": "Tid",
-			      "selection": {
-			        "filter": "item",
-			        "values": years
-			      }
-			    }
-			  ],
-			  "response": {
-			    "format": "json"
-			  }
-			});
+						  "query": [
+						    {
+						      "code": "UtbinriktnSUN2000",
+						      "selection": {
+						        "filter": "item",
+						        "values": [
+						          utbildningsgrupp
+						        ]
+						      }
+						    },
+						    {
+						      "code": "Kon",
+						      "selection": {
+						        "filter": "item",
+						        "values": [
+						          "1",
+						          "2"
+						        ]
+						      }
+						    },
+						    {
+						      "code": "ContentsCode",
+						      "selection": {
+						        "filter": "item",
+						        "values": [
+						          "AM0112B1"
+						        ]
+						      }
+						    },
+						    {
+						      "code": "Tid",
+						      "selection": {
+						        "filter": "item",
+						        "values": years
+						      }
+						    }
+						  ],
+						  "response": {
+						    "format": "json"
+						  }
+						});
 		let headers = new Headers({ 'Content-Type': 'application/json' })
-		return this.econData = this.http.post('http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieYrke', body)
+		return this.econData = this.http.post(url, body)
              .toPromise()
              .then(this.exportEconData)
              .catch(this.handleError);
@@ -119,11 +117,13 @@ export class EconService {
 
 	private exportEconData(res: Response) {
 		let body = res.json();
-	  
+	  	console.log(body);
 		let years = [];
 		let valuesM = [];
 		let valuesF = [];
-		
+		let yLabel = body.columns[3].text
+		let xLabel = body.columns[2].text
+
 		for (var i = 0; i < body['data'].length/2; ++i) {
 			years[i] = body['data'][i].key[2]
 			if(body['data'][i].key[1] === "1") {
@@ -133,15 +133,14 @@ export class EconService {
 				valuesF[i] = body['data'][body['data'].length/2 + i].values[0]
 			}
 		}
-		// this.econData.labels = years
-		// this.econData.maleData = valuesM
-		// this.econData.femaleData = valuesF
-
-	  return { 
+		
+	  	return { 
 			labels: years,
+			xLabel: xLabel,
+			yLabel: yLabel,
 			maleData: valuesM,
 			femaleData: valuesF
-		}
+			}
 	}
 
 	private handleError (error: any) {

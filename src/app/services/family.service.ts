@@ -6,7 +6,6 @@ import 'rxjs/add/operator/toPromise';
 export class FamilyService {
 
   constructor (private http: Http) {}
-  url = 'http://api.scb.se/OV0104/v1/doris/sv/ssd/START/SF/SF0101/ForaldraPenning'
   familyData:Object;
 
   getFamilyData(){
@@ -15,7 +14,6 @@ export class FamilyService {
 
   familyOptions(res: Response){
     let body = res.json();
-    console.log(body)
     let yrken = []
     let years = []
 
@@ -38,7 +36,7 @@ export class FamilyService {
           {
             items: yrken,
             placeholder: "Välj region",
-            id: "workgroup"
+            id: "region"
           },
           {
             items: years,
@@ -54,8 +52,7 @@ export class FamilyService {
         }
   }
 
-  fetchFamilyData(region, yearFrom, yearTo){
-    console.log(region + yearFrom + yearTo)
+  fetchFamilyData(region, yearFrom, yearTo, url){
     let years = this.calcYears(yearFrom, yearTo)
     let filter:String;
     if(parseInt(region) === 0) filter = "vs:RegionRiket99";
@@ -104,7 +101,7 @@ export class FamilyService {
                         }
                       });
     let headers = new Headers({ 'Content-Type': 'application/json' })
-    return this.familyData = this.http.post(this.url, body)
+    return this.familyData = this.http.post(url, body)
              .toPromise()
              .then(this.exportFamilyData)
              .catch(this.handleError);
@@ -123,11 +120,11 @@ export class FamilyService {
 
   private exportFamilyData(res: Response) {
     let body = res.json();
-    console.log(body)
     let years = [];
     let valuesM = [];
     let valuesF = [];
-    
+    let yLabel = body.columns[3].text
+    let xLabel = body.columns[2].text
     for (var i = 0; i < body['data'].length/2; ++i) {
       years[i] = body['data'][i].key[2]
       if(body['data'][i].key[1] === "1") {
@@ -143,6 +140,8 @@ export class FamilyService {
 
     return { 
       labels: years,
+      xLabel: xLabel,
+      yLabel: yLabel,
       maleData: valuesM,
       femaleData: valuesF
     }

@@ -24,12 +24,20 @@ export class InputMenuComponent implements OnInit {
     yearFrom: 0,
     yearTo: 0
   }
+
+  selValues = {}
   //initialisation of value-variables (NOT GOOD SYSTEM)
   workgroup = {};
   yearFrom = {};
   yearTo = {};
 
-  menu:Object = {};
+  menu:Object = {
+    subject: "",
+    title: "",
+    options:[]
+  }
+
+  disabled:boolean = true;
   
 
   constructor(private statisticsService: StatisticsService) { 
@@ -47,16 +55,35 @@ export class InputMenuComponent implements OnInit {
     needs a remake as well!
   */
   refreshValue(value:any, type:any) {
-    if(this.subject['subject'] == "econ") {
-      if(type === "workgroup") this.options.workgroup = value.id;
-      if(type === "yearFrom") this.options.yearFrom = parseInt(value.id);
-      if(type === "yearTo") this.options.yearTo = parseInt(value.id);
+    let values = this.selValues
+    this.menu['options'].forEach(function (option) {
+      if(type == option.id) {
+        values[type] = value.id
+      }
+    })
+    this.disabled = this.disable() 
+  }
+
+
+  /*
+    checks wether selection is valid or not. Loops through
+    selValues object and returns true or false
+  */
+  disable(){
+    if(this.menu['options'].length === Object.keys(this.selValues).length){
+      for (let option in this.selValues) {
+        if (option === "yearFrom") {
+          if(parseInt(this.selValues[option]) > parseInt(this.selValues["yearTo"])){
+            return true
+          }else{
+            return false
+          }
+        }
+      }
+      return false
+    }else{
+      return true
     }
-    else{
-      if(type === "workgroup") this.options.workgroup = value.id;
-      if(type === "yearFrom") this.options.yearFrom = value.id;
-      if(type === "yearTo") this.options.yearTo = value.id;
-    } 
   }
 
   /*
@@ -67,15 +94,21 @@ export class InputMenuComponent implements OnInit {
   */
   getStatistics(){
     let t = this;
+    let args = []
+    // this.selValues.forEach(function(value) {
+    //   args.push(value)
+    // })
+    for (let option in this.selValues) {
+      if (this.selValues.hasOwnProperty(option)) {
+          args.push(this.selValues[option])
+      }
+    }
+
     this.statisticsService
-      .fetchData([
-        this.options.workgroup, 
-        this.options.yearFrom.toString(), 
-        this.options.yearTo.toString()],
-        this.subject['subject'])
-          .then(function(data) {
-            t.notify.emit(t.subject['subjectNr']);
-          })
+      .fetchData(args, this.subject['subject'], this.subject['optionsUrl'])
+        .then(function(data) {
+          t.notify.emit(t.subject['subjectNr']);
+        })
   }
 
   /*
