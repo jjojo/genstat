@@ -133,7 +133,7 @@ export class PowerService {
     	let xLabel = body.columns[3].text
     	let yLabel = body.columns[4].text
 
-    	console.log(body)
+    	//console.log(body)
 		for (var i = 0; i < body['data'].length/2; ++i) {
 			years[i] = body['data'][i].key[3]
 			if(body['data'][i].key[2] === "1") {

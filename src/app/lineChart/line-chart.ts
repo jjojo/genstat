@@ -122,7 +122,7 @@ export class LineChartComponent {
   getData(){
     let t = this;
     this.statisticsService.getData(this.subject['subject']).then(function(data) {
-      console.log(data)
+      //console.log(data)
       // labels, displayed in the x-axis of chart
       t.data.labels = data['labels']
       // first dataset is female data, results in graphics 'in-front'
