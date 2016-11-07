@@ -1,6 +1,7 @@
 <div *ngFor="let subject of info" class="wrapper">
-	<h2 [ngStyle]="{'color': subject.color}">{{subject.title}}</h2>
-
+	
+	<h2 [ngStyle]="{'color': subject.color}" id="{{subject.title}}">{{subject.title}}</h2>
+							
 	<div class="chart">
 		<line-chart [subject]="subject"></line-chart>
 	</div>
@@ -13,5 +14,12 @@
 		</input-menu>
 
 	</div>
-	
+
+	<share-buttons
+	 [url]="'http://jonasjohansson.net'"
+	 [count]="false"
+	 [totalCount]="false"
+	 >
+	 </share-buttons>
+	 <menu [subject]="subject"></menu>
 </div>

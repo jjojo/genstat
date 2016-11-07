@@ -1,16 +1,23 @@
 <div class="wrapper">
+	<object class="version-tag" type="image/svg+xml" data="../../assets/img/version_tag.svg">
+		<img src="../../assets/img/version_tag.png">	
+	</object>
 	<h1>kvinnor & män</h1>
 
 	<object type="image/svg+xml" data="../../assets/img/logo.svg">
   		<img src="../../assets/img/logo.png" />
 	</object>
-	
+
 	<div class="subjects">
-		<div *ngFor="let subject of info" class="subject">
+		<a *ngFor="let subject of info" 
+		class="subject" 
+		pageScroll href="#{{subject.title}}">
+
 			<h3>{{ subject.title }}</h3>
-			<img src="{{subject.iconUrl}}"/>
+			<img src="{{subject.iconUrl}}.svg"/>
 			<p>{{ subject.description }}</p>
-		</div>
+
+		</a>
 	</div>
 	
 </div>

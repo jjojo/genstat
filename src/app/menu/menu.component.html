@@ -1,20 +1,14 @@
-<div [ngClass]="menu">
+<div class="wrapper">
 
-	<!-- BRAND/HOME link -->
-	<a [routerLink]="['/']"
-	(click)="menu = 'menu'">
-		<h2>HEM</h2>
-	</a>
-
-	<!-- MENU OPTIONS -->
-	<ul>
-		<a *ngFor="let option of menuOptions"
-		[routerLink]='option.link'
-		(click)="minify()">
-			<li>
-				<h2>{{option.title}}</h2>
-			</li>
+	<div class="menu">
+		<a *ngFor="let subject of info" 
+		class="subject" 
+		pageScroll href="#{{subject.title}}">
+			<img src="{{activeSrc(subject)}}"/>
+			<!-- <object type="image/svg+xml" [data]="secureUrl(subject.iconUrl)">
+					<img src="../../assets/img/logo.png" />
+			</object> -->
 		</a>
-	</ul>
-
+	</div>
+	
 </div>

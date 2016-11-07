@@ -6,7 +6,6 @@ import 'rxjs/add/operator/toPromise';
 export class PowerService {
 
 	constructor (private http: Http) {}
-	url = 'http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0107/ME0107C/Riksdagsledamoter'
 	powerData:Object;
 	years;
 	getPowerData(){
@@ -15,7 +14,6 @@ export class PowerService {
 
 	powerOptions(res: Response){
 		let body = res.json();
-		console.log(body)
 		let yrken = []
 		let years = []
 
@@ -38,7 +36,7 @@ export class PowerService {
 					{
 						items: yrken,
 						placeholder: "Välj parti",
-						id: "workgroup"
+						id: "party"
 					},
 					{
 						items: years,
@@ -54,8 +52,7 @@ export class PowerService {
 				}
 	}
 
-	fetchPowerData(parti, yearFrom, yearTo){
-		console.log(parti + yearFrom + yearTo)
+	fetchPowerData(parti, yearFrom, yearTo, url){
 		let years = this.calcYears(yearFrom, yearTo)
 		let body = JSON.stringify({
 						  "query": [
@@ -100,7 +97,7 @@ export class PowerService {
 						  }
 						});
 		let headers = new Headers({ 'Content-Type': 'application/json' })
-		return this.powerData = this.http.post(this.url, body)
+		return this.powerData = this.http.post(url, body)
              .toPromise()
              .then(this.exportPowerData)
              .catch(this.handleError);
@@ -125,17 +122,18 @@ export class PowerService {
 				break
 			}
 		}
-		console.log(years)
 		return years;
 	}
 
 	private exportPowerData(res: Response) {
 		let body = res.json();
-	  	console.log(body)
 		let years = [];
 		let valuesM = [];
 		let valuesF = [];
-		console.log(body)
+    	let xLabel = body.columns[3].text
+    	let yLabel = body.columns[4].text
+
+    	//console.log(body)
 		for (var i = 0; i < body['data'].length/2; ++i) {
 			years[i] = body['data'][i].key[3]
 			if(body['data'][i].key[2] === "1") {
@@ -145,12 +143,11 @@ export class PowerService {
 				valuesF[i] = body['data'][body['data'].length/2 + i].values[0]
 			}
 		}
-		// this.powerData.labels = years
-		// this.powerData.maleData = valuesM
-		// this.powerData.femaleData = valuesF
 
 	  return { 
 			labels: years,
+			xLabel: xLabel,
+      		yLabel: yLabel,
 			maleData: valuesM,
 			femaleData: valuesF
 		}

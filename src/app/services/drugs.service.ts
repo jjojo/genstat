@@ -5,9 +5,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class DrugsService {
 
-	constructor (private http: Http) {}
-	
-	url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/LE/LE0101/LE0101H/LE0101H25"
+	constructor (private http: Http) {}	
 	drugsData:Object;
 
 	getDrugsData(){
@@ -16,7 +14,6 @@ export class DrugsService {
 
 	drugsOptions(res: Response){
 		let body = res.json();
-		console.log(body)
 		let illness = []
 		let ages = []
 		let years = []
@@ -45,23 +42,20 @@ export class DrugsService {
 				options: [
 					{
 						items: illness,
-						placeholder: "hälsoproblem",
-						id: "workgroup"
+						placeholder: "Välj tobaksvana",
+						id: "drugHabit"
 					},
 					{
 						items: ages,
 						placeholder: "åldrar",
-						id: "yearFrom"
+						id: "ages"
 					}
 				]
 				}
 	}
 
 
-	fetchDrugsData(habit, age){
-
-		//console.log(yrkesgrupp + yearFrom + yearTo)
-
+	fetchDrugsData(habit, age, url){
 		let body = JSON.stringify({
 						  "query": [
 						      {
@@ -108,7 +102,7 @@ export class DrugsService {
 						  }
 						})
 		let headers = new Headers({ 'Content-Type': 'application/json' })
-		return this.drugsData = this.http.post(this.url, body)
+		return this.drugsData = this.http.post(url, body)
              .toPromise()
              .then(this.exportDrugsData)
              .catch(this.handleError);
@@ -118,11 +112,12 @@ export class DrugsService {
 
 	private exportDrugsData(res: Response) {
 		let body = res.json();
-	  	console.log(body)
 		let years = [];
 		let valuesM = [];
 		let valuesF = [];
-		
+		let yLabel = body.columns[4].text
+		let xLabel = body.columns[3].text
+		//console.log(body)
 		for (var i = 0; i < body['data'].length/2; ++i) {
 			years[i] = body['data'][i].key[3]
 			if(body['data'][i].key[2] === "1") {
@@ -133,10 +128,10 @@ export class DrugsService {
 			}
 		}
 		
-		console.log(years)
-
 	  return { 
 			labels: years,
+			xLabel: xLabel,
+			yLabel: yLabel,
 			maleData: valuesM,
 			femaleData: valuesF
 		}

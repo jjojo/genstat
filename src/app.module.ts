@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ChartModule } from 'angular2-chartjs';
 import { LineChartComponent } from './app/lineChart/line-chart';
+import { ShareButtonsModule } from "ng2-sharebuttons";
 
 import { ROUTING } from './app.routing.ts';
 import { MyApp } from './app/app';
@@ -20,11 +21,7 @@ import { MenuComponent } from './app/menu/menu.component';
 import { EconComponent } from './app/econ/econ.component';
 
 import { InputMenuComponent } from './app/inputMenu/inputMenu.component';
-import { MissionControlComponent } from './app/missions/missioncontrol.component';
-import { NameChildComponent } from './app/missions/mission-child.component';
-import { AstronautComponent } from './app/missions/astronaut.component';
 
-import { MissionService } from './app/services/mission.service';
 import { StatisticsService } from './app/services/statistics.service';
 import { EconService } from './app/services/econ.service';
 import { HealthService } from './app/services/health.service';
@@ -35,6 +32,7 @@ import { FamilyService } from './app/services/family.service';
 import { SelectComponent } from './app/components/select/select';
 import { HighlightPipe } from './app/components/select/select-pipes';
 import { OffClickDirective } from './app/components/select/off-click';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 
 //declare alll dependencies and libs the app uses
@@ -46,6 +44,8 @@ import { OffClickDirective } from './app/components/select/off-click';
   ROUTING,
   ChartModule,
   FormsModule,
+  ShareButtonsModule,
+  Ng2PageScrollModule
   ],
   declarations: [ 
   MyApp, 
@@ -59,16 +59,12 @@ import { OffClickDirective } from './app/components/select/off-click';
   StatisticsComponent,
   SelectComponent,
   HighlightPipe,
-  OffClickDirective,
-  MissionControlComponent,
-  NameChildComponent,
-  AstronautComponent
+  OffClickDirective
   //StatisticsService
   ],
   bootstrap: [ MyApp ],
   providers : [
   StatisticsService,
-  MissionService,
   EconService,
   HealthService,
   PowerService,

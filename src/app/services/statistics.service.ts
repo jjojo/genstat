@@ -25,47 +25,52 @@ export class StatisticsService {
 		subjects:[{
 				subject: "econ",
 				subjectNr: 0,
-				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieYrke",
+				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/AM/AM0112/TidsserieUtbinr",
 				title: "ekonomi",
-				iconUrl: "../../assets/img/pig-coin.svg",
+				iconUrl: "../../assets/img/pig-coin",
 				color: "rgba(120, 173, 181, 1)",
-				description:"Hur ser statistiken ut för kvinnors & mäns löner, besparingar och kapital?"
+				description:"Hur ser statistiken ut för kvinnors & mäns löner, besparingar och kapital?",
+				source: ['http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__AM__AM0112/TidsserieUtbinr/?rxid=2c9e7695-e4ce-4e90-9729-81e1b67a9686']
 			},
 			{	
 				subject: "health",
 				subjectNr: 1,
 				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/LE/LE0101/LE0101H/LE0101H01",
 				title: "hälsa",
-				iconUrl: "../../assets/img/health.svg",
+				iconUrl: "../../assets/img/health",
 				color: "rgba(208, 134, 146, 1)",
-				description:"Hur ser statistiken ut för kvinnors & mäns hälsa, sjukdommar och stress?"
+				description:"Hur ser statistiken ut för kvinnors & mäns hälsa, sjukdommar och stress?",
+				source:['http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__LE__LE0101__LE0101H/LE0101H01/?rxid=e2f49d74-cf23-4ca1-a09f-ea1de0a27e49']
 			},
 			{	
 				subject: "power",
 				subjectNr: 2,
 				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/ME/ME0107/ME0107C/Riksdagsledamoter",
 				title: "inflytande",
-				iconUrl: "../../assets/img/tie.svg",
+				iconUrl: "../../assets/img/tie",
 				color: "rgba(149, 134, 122, 1)",
-				description:"Hur ser inflytandet ut i samhället? hur många kvinnor & män väljs in i riksdagen till exempel"
+				description:"Hur ser inflytandet ut i samhället? hur många kvinnor & män väljs in i riksdagen till exempel",
+				source:['http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0107__ME0107C/Riksdagsledamoter/?rxid=a6313680-1685-4c1e-af1c-f603c4fd927e']
 			},
 			{
 				subject: "drugs",
 				subjectNr: 3,
 				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/LE/LE0101/LE0101H/LE0101H25",
 				title: "tobak",
-				iconUrl: "../../assets/img/drink.svg",
+				iconUrl: "../../assets/img/drink",
 				color: "rgba(174, 200, 137, 1)",
-				description:"Hur ser tobaksvanorna ut för kvinnor & män?"
+				description:"Hur ser tobaksvanorna ut för kvinnor & män?",
+				source:['http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__LE__LE0101__LE0101H/LE0101H25/?rxid=dc163be6-69d0-4285-9e05-2dbdacdf0e0f']
 			},
 			{
 				subject: "family",
 				subjectNr: 4,
 				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/SF/SF0101/ForaldraPenning",
 				title: "familj",
-				iconUrl: "../../assets/img/fam.svg",
+				iconUrl: "../../assets/img/fam",
 				color: "rgba(239, 153, 98, 1)",
-				description:"Hur ser statistik för familjelivet ut för kvinnor & män?"
+				description:"Hur ser statistik för familjelivet ut för kvinnor & män?",
+				source:['http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__SF__SF0101/ForaldraPenning/?rxid=2c9e7695-e4ce-4e90-9729-81e1b67a9686']
 			}
 		]
 	}
@@ -103,20 +108,20 @@ export class StatisticsService {
 		console.error("Could not get options from statistics.Service.getOptions() function")
 	}
 
-	fetchData(menuSettings, type){
-		console.log(menuSettings)
+	fetchData(menuSettings, type, url){
+		//console.log(menuSettings)
 
 		switch (type) {
 			case "econ":
-				return this._econ.fetchEconData(menuSettings[0],menuSettings[1],menuSettings[2]);
+				return this._econ.fetchEconData(menuSettings[0],menuSettings[1],menuSettings[2],url);
 			case "health":
-				return this._health.fetchHealthData(menuSettings[0],menuSettings[1],menuSettings[2]);
+				return this._health.fetchHealthData(menuSettings[0],menuSettings[1],menuSettings[2],url);
 			case "power":
-				return this._power.fetchPowerData(menuSettings[0],menuSettings[1],menuSettings[2]);
+				return this._power.fetchPowerData(menuSettings[0],menuSettings[1],menuSettings[2],url);
 			case "drugs":
-				return this._drugs.fetchDrugsData(menuSettings[0],menuSettings[1]);
+				return this._drugs.fetchDrugsData(menuSettings[0],menuSettings[1],url);
 			case "family":
-				return this._family.fetchFamilyData(menuSettings[0],menuSettings[1],menuSettings[2]);
+				return this._family.fetchFamilyData(menuSettings[0],menuSettings[1],menuSettings[2],url);
 			}
 		console.error("Could not fetch data from statistics.Service.fetchData() function")
 	}
