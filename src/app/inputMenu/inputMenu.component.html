@@ -12,42 +12,24 @@
 
 		
 		<button 
-		*ngIf="subject.subject === 'econ'"
+		class="submit-btn" 
 		(click)="getStatistics()" 
-		[disabled]="(
-		options.workgroup === null 
-		|| options.yearTo === 0 
-		|| options.yearFrom === 0 
-		|| options.yearFrom > options.yearTo)"
+		[disabled]="disabled"
 		[ngClass]="{
-		'disabled': (!options.workgroup 
-		||!options.yearTo 
-		||!options.yearFrom
-		||options.yearFrom >= options.yearTo),
-		'active':(options.workgroup 
-		&& options.yearTo 
-		&& options.yearFrom
-		&& options.yearFrom <= options.yearTo
-		)}">
-			Hämta {{subject.title}}
+		'disabled': disabled,
+		'active': !disabled}">
+			Hämta
 		</button>
 
-		<button 
-		*ngIf="subject.subject !== 'econ'"
-		(click)="getStatistics()" 
-		[disabled]="(
-		options.workgroup === null
-		|| options.yearFrom === 0)"
-		[ngClass]="{
-		'disabled': (!options.workgroup  
-		||!options.yearFrom),
-		'active':(options.workgroup 
-		&& options.yearFrom
-		)}">
-			Hämta {{subject.title}}
-		</button>
+		<div *ngFor="let source of subject.source" class="source">
+			<p>
+				Källa: SCB
+				<br>
+				<a href="{{source}}" target="_blank">{{source | slice:0:37}}...</a>
+			</p>
+		</div>
 	</div>
-
+</div>
 
 	<!-- <div *ngIf="subject.subject === preferences.subject" >
 		<ng-select class="ngSelect"
@@ -139,4 +121,3 @@ ORGINAL SPARAD FÖR ATT EVENTULLT BEHÖVER JAG DISABLED
      <p>Form value: {{ yearFrom.viewModel.index }}</p>
      <p>To value: {{ yearTo.viewModel.index }}</p> -->
 
-</div>

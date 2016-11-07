@@ -33,27 +33,44 @@ export class LineChartComponent {
             yAxes: [{
                 ticks: {
                     max: 100,
-                    min: 0,
+                    min: 0
+                },
+                scaleLabel: {
+                  display: true
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                  display: true
                 }
             }]
         }
       }
     }else{
       this.type = 'line'
-      this. options = {
+
+      this.options = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: false
+                },
+                scaleLabel: {
+                  display: true
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                  display: true
                 }
             }]
         }
       }
-    }
-
   }
+
+}
   
   //initial data for charts
   data = {labels: [],
@@ -105,19 +122,19 @@ export class LineChartComponent {
   getData(){
     let t = this;
     this.statisticsService.getData(this.subject['subject']).then(function(data) {
+      console.log(data)
       // labels, displayed in the x-axis of chart
       t.data.labels = data['labels']
       // first dataset is female data, results in graphics 'in-front'
       t.data.datasets[0].data = data['femaleData']
       // second dataset is male data, results in graphics 'behind'
       t.data.datasets[1].data = data['maleData']
-      
-      // reverse order of datasets so minority (male data) is in front on the graph
-      if(t.subject['subject'] === "family") {
-        t.data.datasets.reverse()
-      }
+      // sets axes labels
+      t.chartComponent.chart.options.scales.yAxes[0].scaleLabel.labelString = data['yLabel']
+      t.chartComponent.chart.options.scales.xAxes[0].scaleLabel.labelString = data['xLabel']
       // updates and redraws chart
       t.chartComponent.chart.update();
+
    })
   }
 }

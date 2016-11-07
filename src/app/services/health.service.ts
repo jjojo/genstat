@@ -6,8 +6,7 @@ import 'rxjs/add/operator/toPromise';
 export class HealthService {
 
 	constructor (private http: Http) {}
-	
-	url = 'http://api.scb.se/OV0104/v1/doris/sv/ssd/START/LE/LE0101/LE0101H/LE0101H01'
+
 	healthData:Object;
 
 	getHealthData(){
@@ -16,7 +15,6 @@ export class HealthService {
 
 	healthOptions(res: Response){
 		let body = res.json();
-		console.log(body)
 		let illness = []
 		let ages = []
 		let years = []
@@ -46,19 +44,19 @@ export class HealthService {
 					{
 						items: illness,
 						placeholder: "hälsoproblem",
-						id: "workgroup"
+						id: "healthProblem"
 					},
 					{
 						items: ages,
 						placeholder: "åldrar",
-						id: "yearFrom"
+						id: "ages"
 					}
 				]
 				}
 	}
 
 
-	fetchHealthData(illness, age, years){
+	fetchHealthData(illness, age, years, url){
 
 		//console.log(yrkesgrupp + yearFrom + yearTo)
 
@@ -107,7 +105,7 @@ export class HealthService {
 						  }
 						})
 		let headers = new Headers({ 'Content-Type': 'application/json' })
-		return this.healthData = this.http.post('http://api.scb.se/OV0104/v1/doris/sv/ssd/START/LE/LE0101/LE0101H/LE0101H01', body)
+		return this.healthData = this.http.post(url, body)
              .toPromise()
              .then(this.exportHealthData)
              .catch(this.handleError);
@@ -117,11 +115,11 @@ export class HealthService {
 
 	private exportHealthData(res: Response) {
 		let body = res.json();
-	  	//console.log(body)
 		let years = [];
 		let valuesM = [];
 		let valuesF = [];
-		
+		let yLabel = body.columns[4].text
+    	let xLabel = body.columns[3].text
 		for (var i = 0; i < body['data'].length/2; ++i) {
 			years[i] = body['data'][i].key[3]
 			if(body['data'][i].key[2] === "1") {
@@ -137,6 +135,8 @@ export class HealthService {
 
 	  return { 
 			labels: years,
+			xLabel: xLabel,
+      		yLabel: yLabel,
 			maleData: valuesM,
 			femaleData: valuesF
 		}

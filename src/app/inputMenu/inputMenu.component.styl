@@ -5,10 +5,11 @@
 .wrapper
 	center(100%, pad:5%)
 	color light-grey
+	min-height 70vh
 	
 	.ngSelect
 		font-size 1.6em
-	
+		
 	h4
 		margin: 25px 0px
 		text-align: center
@@ -18,13 +19,22 @@
 	.active
 		background-color: econ-blue
 		color white
+		outline: none
 
-	button
+	.submit-btn
 		center()
 		margin-top: 15%
 		border-radius 5px
 		font-size 1.6em
 		padding 5px 25px
+	
+	.source
+		text-align center
+		margin-top: 2%
+		font-size xx-small
+		a
+			text-decoration underline
+			color light-grey
 		
 		
 	:host /deep/ 
@@ -43,10 +53,11 @@
 			
 		.ui-select-container
 			margin-bottom: 30px
+			outline none 
 			
 		.ui-select-placeholder
 			font-size 1.6em
-			
+		
 		.ui-select-match-text
 			font-size 1.6em
 			
