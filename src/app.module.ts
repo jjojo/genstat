@@ -17,6 +17,7 @@ import { Home } from './app/home/home';
 import { StartComponent } from './app/start/start.component';
 import { StatisticsComponent } from './app/statistics/statistics.component';
 import { MenuComponent } from './app/menu/menu.component';
+import { FooterComponent } from './app/footer/footer.component';
 
 import { EconComponent } from './app/econ/econ.component';
 
@@ -59,7 +60,8 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
   StatisticsComponent,
   SelectComponent,
   HighlightPipe,
-  OffClickDirective
+  OffClickDirective,
+  FooterComponent
   //StatisticsService
   ],
   bootstrap: [ MyApp ],
