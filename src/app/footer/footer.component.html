@@ -1,20 +1,30 @@
 <div class="wrapper">
 
 	<div class="footer">
+
 		<div class="subject">
-			<h4>Kontakt</h4>
+			<h4>Webbplatskarta</h4>
+			<a pageScroll href="#home">start</a>
+			<br>
+			<a *ngFor="let subject of subjects" pageScroll href="#{{subject.title}}">
+				{{subject.title}}
+				<br>
+			</a>
 		</div>
 
 		<div class="subject">
 			<h4>Statistiska källor</h4>
-			<p>Jonas Johnasson</p>
-			<a href="http://jonasjohansson.net/">http://jonasjohansson.net/</a>
-			<p>Jonas Johnasson</p>
+			<p>Statistiska centralbyrån</p>
+			<a href="http://www.scb.se/" target="_blank">scb.se</a>
 		</div>
 
 		<div class="subject">
-			<h4>Webbplatskarta</h4>
+			<h4>Kontakt</h4>
+			<p>Jonas Johnasson</p>
+			<a href="http://jonasjohansson.net/" target="_blank">jonasjohansson.net</a>
+			<p>mail@domain.com</p>
 		</div>
+
 	</div>
-	
+
 </div>
