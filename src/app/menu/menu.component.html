@@ -2,7 +2,7 @@
 
 	<div class="menu">
 		<a *ngFor="let subject of info" 
-		class="subject" 
+		class="subject"
 		pageScroll href="#{{subject.title}}">
 			<img src="{{activeSrc(subject)}}"/>
 			<!-- <object type="image/svg+xml" [data]="secureUrl(subject.iconUrl)">
@@ -10,5 +10,5 @@
 			</object> -->
 		</a>
 	</div>
-	
+
 </div>
