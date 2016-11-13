@@ -46,6 +46,12 @@ var LineChartComponent = (function () {
     LineChartComponent.prototype.ngOnInit = function () {
         console.log(this.subject['subject']);
         this.id = this.subject['subject'] + "Chart";
+        if (window.outerWidth < 1050) {
+            this.chartFontSize = 20;
+        }
+        else {
+            this.chartFontSize = 14;
+        }
         if (this.subject['subject'] === "health" || this.subject['subject'] === "drugs") {
             this.type = 'bar';
             this.options = {
@@ -55,15 +61,21 @@ var LineChartComponent = (function () {
                     yAxes: [{
                             ticks: {
                                 max: 100,
-                                min: 0
+                                min: 0,
+                                fontSize: this.chartFontSize
                             },
                             scaleLabel: {
-                                display: true
+                                display: true,
+                                fontSize: this.chartFontSize
                             }
                         }],
                     xAxes: [{
+                            ticks: {
+                                fontSize: this.chartFontSize
+                            },
                             scaleLabel: {
-                                display: true
+                                display: true,
+                                fontSize: this.chartFontSize
                             }
                         }]
                 }
@@ -77,15 +89,21 @@ var LineChartComponent = (function () {
                 scales: {
                     yAxes: [{
                             ticks: {
-                                beginAtZero: false
+                                beginAtZero: false,
+                                fontSize: this.chartFontSize
                             },
                             scaleLabel: {
-                                display: true
+                                display: true,
+                                fontSize: this.chartFontSize
                             }
                         }],
                     xAxes: [{
+                            ticks: {
+                                fontSize: this.chartFontSize
+                            },
                             scaleLabel: {
-                                display: true
+                                display: true,
+                                fontSize: this.chartFontSize
                             }
                         }]
                 }

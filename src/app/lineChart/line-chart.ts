@@ -15,10 +15,16 @@ export class LineChartComponent {
   type;
   options;
   id;
+  chartFontSize;
   ngOnInit(){
 
     console.log(this.subject['subject'])
     this.id = this.subject['subject'] + "Chart"
+    if(window.outerWidth < 1050){
+      this.chartFontSize = 20
+    }else{
+      this.chartFontSize = 14
+    }
     /*
       Options should be defined in each subjects service
       if to start from zero, etc
@@ -28,22 +34,28 @@ export class LineChartComponent {
     //Quiq-fix för att prova bar-chart
     if(this.subject['subject'] === "health" || this.subject['subject'] === "drugs") {
       this.type = 'bar'
-      this. options = {
+      this.options = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 ticks: {
                     max: 100,
-                    min: 0
+                    min: 0,
+                    fontSize: this.chartFontSize
                 },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }],
             xAxes: [{
+                ticks:{
+                  fontSize: this.chartFontSize
+                },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }]
         }
@@ -57,15 +69,21 @@ export class LineChartComponent {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: false
+                    beginAtZero: false,
+                    fontSize: this.chartFontSize
                 },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }],
             xAxes: [{
+                ticks:{
+                  fontSize: this.chartFontSize
+                },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }]
         }
