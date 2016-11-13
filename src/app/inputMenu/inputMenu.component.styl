@@ -1,4 +1,5 @@
-@import 'jeet'
+@import '../../../node_modules/jeet/stylus/jeet/index.styl'
+@require '../../../node_modules/rupture/rupture/index.styl'
 @require '../../assets/css/variables'
 
 
@@ -6,10 +7,11 @@
 	center(100%, pad:5%)
 	color light-grey
 	min-height 70vh
-	
+	+tablet()
+		min-height 10vh
 	.ngSelect
 		font-size 1.6em
-		
+
 	h4
 		margin: 25px 0px
 		text-align: center
@@ -27,7 +29,9 @@
 		border-radius 5px
 		font-size 1.6em
 		padding 5px 25px
-	
+		+tablet()
+			margin-top: 0
+
 	.source
 		text-align center
 		margin-top: 2%
@@ -35,39 +39,39 @@
 		a
 			text-decoration underline
 			color light-grey
-		
-		
-	:host /deep/ 
+
+
+	:host /deep/
 		input
 			width: 100%
 			height: auto
 			font-size 1em
-			
+
 		.form-control
 			height: auto
 			background-color: transparent
 			box-shadow none
-			border-width 2px 
+			border-width 2px
 			border-style solid
 			border-radius 5px
-			
+
 		.ui-select-container
 			margin-bottom: 30px
-			outline none 
-			
+			outline none
+
 		.ui-select-placeholder
 			font-size 1.6em
-		
+
 		.ui-select-match-text
 			font-size 1.6em
-			
-		.ui-select-choices-row 
+
+		.ui-select-choices-row
 			a
 				white-space: normal !important
-				
+
 		.text-muted
 			color light-grey
-			
+
 		.menu-arrow
 			width 30px
 			margin 7px

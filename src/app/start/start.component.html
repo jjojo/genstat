@@ -1,6 +1,6 @@
-<div class="wrapper">
+<div id="home" class="wrapper">
 	<object class="version-tag" type="image/svg+xml" data="../../assets/img/version_tag.svg">
-		<img src="../../assets/img/version_tag.png">	
+		<img src="../../assets/img/version_tag.png">
 	</object>
 	<h1>kvinnor & män</h1>
 
@@ -9,8 +9,8 @@
 	</object>
 
 	<div class="subjects">
-		<a *ngFor="let subject of info" 
-		class="subject" 
+		<a *ngFor="let subject of info"
+		class="subject"
 		pageScroll href="#{{subject.title}}">
 
 			<h3>{{ subject.title }}</h3>
@@ -19,5 +19,5 @@
 
 		</a>
 	</div>
-	
+
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StatisticsService } from '../services/statistics.service';
 
 @Component({
   selector: 'my-footer',
@@ -6,9 +7,9 @@ import { Component } from '@angular/core';
   styles: [String(require('./footer.component.styl'))]
 })
 export class FooterComponent {
-  
-  constructor(){ 
-    console.log("in footer")
+  subjects:Object;
+  constructor(private statisticsService: StatisticsService){
+    this.subjects = statisticsService.subjects.subjects
   }
 
   footerSubjects = [
@@ -20,7 +21,7 @@ export class FooterComponent {
     }},
     {
       statisticsSource:{
-      title: "Statistiska källor"
+      title: "Statistiska källor",
       sources: [{
         name: "Statistiska centralbyrån",
         website: "http://www.scb.se/"
