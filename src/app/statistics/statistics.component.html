@@ -1,19 +1,19 @@
 <div *ngFor="let subject of info" class="wrapper">
-	
+
 	<h2 [ngStyle]="{'color': subject.color}" id="{{subject.title}}">{{subject.title}}</h2>
-							
-	<div class="chart">
-		<line-chart [subject]="subject"></line-chart>
-	</div>
+
 	<div class="get-statistics">
 		<h3>hämta statistik </h3>
-
-		<input-menu 
+		<input-menu
 		[subject]="subject"
 		(notify)="onNotify($event)">
 		</input-menu>
-
 	</div>
+
+	<div class="chart">
+		<line-chart [subject]="subject"></line-chart>
+	</div>
+
 
 	<share-buttons
 	 [url]="'http://jonasjohansson.net'"

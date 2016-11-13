@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Home } from './home/home';
 import { About } from './about/about';
 import { FooterComponent } from './footer/footer.component';
@@ -13,4 +13,10 @@ import { FooterComponent } from './footer/footer.component';
   `,
   styles: [String(require('./app.styl'))]
 })
-export class MyApp {}
+export class MyApp {
+
+  //query = window.matchMedia("(orientation:landscape)")
+//console.log("Device held " + (this.query.matches ? "horizontally" : "vertically"));
+  constructor(){
+  }
+}

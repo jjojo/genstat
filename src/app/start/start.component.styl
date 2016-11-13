@@ -1,4 +1,5 @@
-@import 'jeet'
+@import '../../../node_modules/jeet/stylus/jeet/index.styl'
+@require '../../../node_modules/rupture/rupture/index.styl'
 @require '../../assets/css/variables'
 
 
@@ -6,29 +7,36 @@
 .wrapper
 	span(1)
 	margin-bottom: 12%
-	
+	//+tablet(orientation: landscape)
+	//	span(1/2)
+	// +tablet(orientation: portrait)
+	//
+
 	h1
 		margin-top: 0
 		padding-top: 7vh
 		margin-bottom: 7vh
 		text-align: center
-	
+
 	object
 		center(100%,pad:5%)
 		width: 30vw
 		margin-bottom: 7vh
-	
+		+tablet()
+			width: 50vw
+
 	.version-tag
 		position: absolute
 		left:0
 		top 0
 		padding: 0 10% 0 0
 		margin: 0
-		
+		width: 30vw
+
 	.subjects
 		center(100%,pad:5%)
 		text-align: center
-	
+
 	.subject
 		height: 40vh;
 		min-height: 300px;
@@ -36,7 +44,12 @@
 		box-shadow: 7px 7px 10px -11px black;
 		border-radius: 4px;
 		background-color: white;
-		
+		+tablet(orientation: landscape)
+			height: 45vh
+			min-height: 320px
+		+tablet(orientation: portrait)
+			height: 26vh
+
 		col(1/5, gutter: 1.5)
 
 		color light-grey
@@ -63,4 +76,10 @@
 		&:nth-child(5)
 			h3
 				color family-orange
-	
+
+
+	// +tablet(orientation: portrait)
+	// 	object
+	// 		width: 50vh
+	// 	.subject
+	// 		height: 26vh
