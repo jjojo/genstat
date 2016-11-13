@@ -2,6 +2,8 @@
 @require '../../../node_modules/rupture/rupture/index.styl'
 @require '../../assets/css/variables'
 
+rupture.mobile-cutoff = 399px
+
 .wrapper
 	span(1)
 	margin-bottom: 12%
@@ -11,6 +13,8 @@
 	h3
 		margin-bottom: 0
 		text-align: center
+		+mobile()
+			font-size: 4em
 
 	.get-statistics
 		shift(70/100)
@@ -19,7 +23,9 @@
 		+tablet()
 			unshift()
 			stack()
-
+		+mobile()
+			unshift()
+			stack()
 
 	.chart
 		shift(-1/4)
@@ -28,6 +34,13 @@
 		+tablet()
 			unshift()
 			stack()
+			center(95%)
+
+		+mobile()
+			unshift()
+			stack()
+			center(95%)
+
 		+tablet(orientation:portrait)
 			margin-top: 5% !important
 
@@ -35,11 +48,19 @@
 		span(2/3)
 		margin-left: 3%
 		margin-top -15px
+		+mobile()
+			span(1)
+			/deep/
+				.sb-container
+					button
+						font-size: 2em
 
 	menu
 		span(1/3)
 		margin-left -3%
 		margin-top 0%
+		+mobile()
+			display: none
 
 	&:nth-child(1)
 		/deep/

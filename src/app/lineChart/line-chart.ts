@@ -14,9 +14,11 @@ export class LineChartComponent {
   @Input() subject: Object;
   type;
   options;
+  id;
   ngOnInit(){
 
-    
+    console.log(this.subject['subject'])
+    this.id = this.subject['subject'] + "Chart"
     /*
       Options should be defined in each subjects service
       if to start from zero, etc
@@ -71,7 +73,7 @@ export class LineChartComponent {
   }
 
 }
-  
+
   //initial data for charts
   data = {labels: [],
     datasets: [
@@ -102,7 +104,7 @@ export class LineChartComponent {
     ]
   }
 
-  
+
   /*
       Grants access to the core chart object don't forget
       to add .chart so chartComponent.chart is the object!
@@ -112,10 +114,13 @@ export class LineChartComponent {
   /*
       Constructor for statisticsService
   */
-  constructor(private statisticsService: StatisticsService) { } 
-  
+  constructor(private statisticsService: StatisticsService) {
+    //this.id = this.subject
+    //console.log(this.id)
+  }
+
   /*
-      Gets data from statistics service. Function tells 
+      Gets data from statistics service. Function tells
       which subject it is an instance of and recieves
       relevant data for the chart.
   */

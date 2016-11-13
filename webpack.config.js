@@ -3,6 +3,8 @@ const CommonsChunkPlugin        = require('webpack/lib/optimize/CommonsChunkPlug
 const CopyWebpackPlugin         = require('copy-webpack-plugin');
 const ContextReplacementPlugin  = require('webpack/lib/ContextReplacementPlugin');
 const jeet = require('jeet');
+const rupture = require('rupture');
+
 
 module.exports = {
   entry: {
@@ -33,7 +35,10 @@ module.exports = {
     noParse: [path.join(__dirname, 'node_modules', 'angular2', 'bundles')]
   },
   stylus: {
-    use: [jeet()]
+    use: [
+      jeet(),
+      rupture()
+    ]
   },
   devServer: {
     contentBase: 'src',
