@@ -1,5 +1,5 @@
 @import '../../../node_modules/jeet/stylus/jeet/index.styl'
-@require '../../../node_modules/rupture/rupture/index.styl'
+//s@require '../../../node_modules/rupture/rupture/index.styl'
 @require '../../assets/css/variables'
 
 .wrapper
@@ -8,14 +8,16 @@
 	:host /deep/
 		canvas
 			min-height 70vh
-	+tablet(orientation:landscape)
-		:host /deep/
-			canvas
+			+tablet(orientation:landscape)
 				min-height 60vh
 
-	+tablet(orientation:portrait)
-		:host /deep/
-			canvas
+			+mobile(orientation:landscape)
+				min-height 80vh
+
+			+tablet(orientation:portrait)
+				min-height 60vh
+
+			+mobile(orientation:portrait)
 				min-height 45vh
 
 button

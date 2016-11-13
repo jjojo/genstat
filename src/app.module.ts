@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ValueProvider } from '@angular/core';
 import { HttpModule } from '@angular/http'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
@@ -36,10 +36,15 @@ import { OffClickDirective } from './app/components/select/off-click';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 
+const WINDOW_PROVIDER: ValueProvider = {
+    provide: Window,
+    useValue: window
+};
+
 //declare alll dependencies and libs the app uses
 
 @NgModule({
-  imports: [ 
+  imports: [
   BrowserModule,
   HttpModule,
   ROUTING,
@@ -48,9 +53,9 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
   ShareButtonsModule,
   Ng2PageScrollModule
   ],
-  declarations: [ 
-  MyApp, 
-  About, 
+  declarations: [
+  MyApp,
+  About,
   Home,
   LineChartComponent,
   MenuComponent,
@@ -71,7 +76,8 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
   HealthService,
   PowerService,
   DrugsService,
-  FamilyService
+  FamilyService,
+  WINDOW_PROVIDER
   ]
 })
 export class AppModule {}

@@ -14,9 +14,17 @@ export class LineChartComponent {
   @Input() subject: Object;
   type;
   options;
+  id;
+  chartFontSize;
   ngOnInit(){
 
-    
+    console.log(this.subject['subject'])
+    this.id = this.subject['subject'] + "Chart"
+    if(window.outerWidth < 1050){
+      this.chartFontSize = 20
+    }else{
+      this.chartFontSize = 14
+    }
     /*
       Options should be defined in each subjects service
       if to start from zero, etc
@@ -26,22 +34,28 @@ export class LineChartComponent {
     //Quiq-fix för att prova bar-chart
     if(this.subject['subject'] === "health" || this.subject['subject'] === "drugs") {
       this.type = 'bar'
-      this. options = {
+      this.options = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 ticks: {
                     max: 100,
-                    min: 0
+                    min: 0,
+                    fontSize: this.chartFontSize
                 },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }],
             xAxes: [{
+                ticks:{
+                  fontSize: this.chartFontSize
+                },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }]
         }
@@ -55,15 +69,21 @@ export class LineChartComponent {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: false
+                    beginAtZero: false,
+                    fontSize: this.chartFontSize
                 },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }],
             xAxes: [{
+                ticks:{
+                  fontSize: this.chartFontSize
+                },
                 scaleLabel: {
-                  display: true
+                  display: true,
+                  fontSize: this.chartFontSize
                 }
             }]
         }
@@ -71,7 +91,7 @@ export class LineChartComponent {
   }
 
 }
-  
+
   //initial data for charts
   data = {labels: [],
     datasets: [
@@ -102,7 +122,7 @@ export class LineChartComponent {
     ]
   }
 
-  
+
   /*
       Grants access to the core chart object don't forget
       to add .chart so chartComponent.chart is the object!
@@ -112,10 +132,13 @@ export class LineChartComponent {
   /*
       Constructor for statisticsService
   */
-  constructor(private statisticsService: StatisticsService) { } 
-  
+  constructor(private statisticsService: StatisticsService) {
+    //this.id = this.subject
+    //console.log(this.id)
+  }
+
   /*
-      Gets data from statistics service. Function tells 
+      Gets data from statistics service. Function tells
       which subject it is an instance of and recieves
       relevant data for the chart.
   */
