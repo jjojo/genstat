@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=latin-ext');
 @require '../../assets/css/variables'
+@import '../../../node_modules/rupture/rupture/index.styl'
 
 html,body
 	background-color: #F2F2F2
@@ -13,19 +14,22 @@ h1
 	font-size 7vw
 	font-weight: 900
 	color dark-grey
-	
+
 h2
 	font-size 3.5vw
 	font-weight: 900
 	color dark-grey
-	
+	+mobile()
+		font-size: 5em
+		margin-bottom: 10%
+
 h3
 	font-size 3vw
 	font-weight: 900
 	color dark-grey
 
 
-.loading 
+.loading
 	opacity: 0;
 	-webkit-transition: opacity .8s ease-in-out
 	-moz-transition: opacity .8s ease-in-out
@@ -44,8 +48,8 @@ my-app:empty + .loading
 	opacity: 1;
 	z-index: 100;
 
-my-app:empty + .loading 
-	h1 
+my-app:empty + .loading
+	h1
 		color: #4c4c4c;
 		position: absolute;
 		top: 50%;

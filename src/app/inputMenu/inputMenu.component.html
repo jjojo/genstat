@@ -10,14 +10,15 @@
 			placeholder="{{option.placeholder}}">
 		</ng-select>
 
-		
-		<button 
-		class="submit-btn" 
-		(click)="getStatistics()" 
+
+		<button
+		class="submit-btn"
+		(click)="getStatistics()"
 		[disabled]="disabled"
 		[ngClass]="{
 		'disabled': disabled,
-		'active': !disabled}">
+		'active': !disabled}"
+		pageScroll href="#{{(win.outerWidth < 1050 && win.outerWidth > 400)? subject.subject + 'Chart' : none}}">
 			Hämta
 		</button>
 
@@ -52,28 +53,28 @@
 			(data)="refreshValue($event, 'yearTo')"
 			placeholder="år till">
 		</ng-select>
-		
-		<button 
-		(click)="getStatistics()" 
+
+		<button
+		(click)="getStatistics()"
 		[disabled]="(
-		options.workgroup === null 
-		|| options.yearTo === null 
-		|| options.yearFrom === null 
+		options.workgroup === null
+		|| options.yearTo === null
+		|| options.yearFrom === null
 		|| options.yearFrom > options.yearTo)"
 		[ngClass]="{
-		'disabled': (!options.workgroup 
-		||!options.yearTo 
+		'disabled': (!options.workgroup
+		||!options.yearTo
 		||!options.yearFrom
 		||options.yearFrom >= options.yearTo),
-		'active':(options.workgroup 
-		&& options.yearTo 
+		'active':(options.workgroup
+		&& options.yearTo
 		&& options.yearFrom
 		&& options.yearFrom <= options.yearTo
 		)}">
 			Hämta {{subject.title}}
 		</button>
 	</div> -->
-<!-- 
+<!--
 
 
 ORGINAL SPARAD FÖR ATT EVENTULLT BEHÖVER JAG DISABLED
@@ -120,4 +121,3 @@ ORGINAL SPARAD FÖR ATT EVENTULLT BEHÖVER JAG DISABLED
      <!-- <p>Form value: {{ f.value | json }}</p>
      <p>Form value: {{ yearFrom.viewModel.index }}</p>
      <p>To value: {{ yearTo.viewModel.index }}</p> -->
-

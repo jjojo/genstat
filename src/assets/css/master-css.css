@@ -18,6 +18,12 @@ h2 {
   font-weight: 900;
   color: #4c4c4c;
 }
+@media only screen and (max-device-width: 400px) {
+  h2 {
+    font-size: 5em;
+    margin-bottom: 10%;
+  }
+}
 h3 {
   font-size: 3vw;
   font-weight: 900;

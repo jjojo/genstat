@@ -13,7 +13,7 @@ export class InputMenuComponent implements OnInit {
   @Input() subject: Object;
   //Output from child to parent through an eventemitter
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
-  
+
   /*
     values from selections is stored
     in options-object. This archetecture
@@ -38,16 +38,24 @@ export class InputMenuComponent implements OnInit {
   }
 
   disabled:boolean = true;
-  
+  win;
 
-  constructor(private statisticsService: StatisticsService) { 
+  constructor(
+    private statisticsService: StatisticsService) {
   }
 
+
+
+// // @HostListener('window:resize', ['$event'])
+// onResize(event) {
+//   event.target.innerWidth;
+// }
   /*
     fetches menu options on initialisation
   */
   ngOnInit():void{
     this.getOptions()
+    this.win = window;
   }
 
   /*
@@ -61,7 +69,7 @@ export class InputMenuComponent implements OnInit {
         values[type] = value.id
       }
     })
-    this.disabled = this.disable() 
+    this.disabled = this.disable()
   }
 
 
@@ -87,12 +95,13 @@ export class InputMenuComponent implements OnInit {
   }
 
   /*
-    Tells service to get data depending on 
+    Tells service to get data depending on
     selected options. When data is resolved
     tell chart to update via parent component,
     statistics.component.ts
   */
   getStatistics(){
+    this.win = window;
     let t = this;
     let args = []
     // this.selValues.forEach(function(value) {
@@ -120,7 +129,7 @@ export class InputMenuComponent implements OnInit {
     let t = this;
     this.statisticsService
       .getOptions(
-        this.subject['subject'], 
+        this.subject['subject'],
         this.subject['optionsUrl'])
           .then(function(data){
             t.menu = data
