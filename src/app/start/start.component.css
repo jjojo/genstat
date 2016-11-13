@@ -22,6 +22,11 @@
   margin-bottom: 7vh;
   text-align: center;
 }
+@media only screen and (max-width: 400px) {
+  .wrapper h1 {
+    font-size: 10vw;
+  }
+}
 .wrapper object {
   *zoom: 1;
   width: auto;
@@ -44,6 +49,11 @@
   clear: both;
 }
 @media only screen and (min-width: 400px) and (max-width: 1050px) {
+  .wrapper object {
+    width: 50vw;
+  }
+}
+@media only screen and (max-width: 400px) {
   .wrapper object {
     width: 50vw;
   }
@@ -78,7 +88,7 @@
 }
 .wrapper .subject {
   height: 40vh;
-  min-height: 300px;
+  min-height: 320px;
   border: 1px solid #d2d2d2;
   box-shadow: 7px 7px 10px -11px #000;
   border-radius: 4px;
@@ -95,12 +105,16 @@
 @media only screen and (min-width: 400px) and (max-width: 1050px) and (orientation: landscape) {
   .wrapper .subject {
     height: 45vh;
-    min-height: 320px;
   }
 }
 @media only screen and (min-width: 400px) and (max-width: 1050px) and (orientation: portrait) {
   .wrapper .subject {
     height: 26vh;
+  }
+}
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+  .wrapper .subject {
+    height: 20vh;
   }
 }
 .wrapper .subject:before,
