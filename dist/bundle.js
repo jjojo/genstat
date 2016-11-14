@@ -5997,7 +5997,7 @@ module.exports = "<div id=\"home\" class=\"wrapper\">\n\t<object class=\"version
 /* 606 */
 /***/ function(module, exports) {
 
-module.exports = "<div *ngFor=\"let subject of info\" class=\"wrapper\">\n\n\t<h2 [ngStyle]=\"{'color': subject.color}\" id=\"{{subject.title}}\">{{subject.title}}</h2>\n\n\t<div class=\"get-statistics\">\n\t\t<h3>hämta statistik </h3>\n\t\t<input-menu\n\t\t[subject]=\"subject\"\n\t\t(notify)=\"onNotify($event)\">\n\t\t</input-menu>\n\t</div>\n\n\t<div class=\"chart\">\n\t\t<line-chart [subject]=\"subject\"></line-chart>\n\t</div>\n\n\n\t<share-buttons\n\t [url]=\"'http://jonasjohansson.net'\"\n\t [count]=\"false\"\n\t [totalCount]=\"false\"\n\t >\n\t </share-buttons>\n\t <menu [subject]=\"subject\"></menu>\n</div>\n";
+module.exports = "<div *ngFor=\"let subject of info\" class=\"wrapper\">\n\n\t<h2 [ngStyle]=\"{'color': subject.color}\" id=\"{{subject.title}}\">{{subject.title}}</h2>\n\n\t<div class=\"get-statistics\">\n\t\t<h3>hämta statistik </h3>\n\t\t<input-menu\n\t\t[subject]=\"subject\"\n\t\t(notify)=\"onNotify($event)\">\n\t\t</input-menu>\n\t</div>\n\n\t<div class=\"chart\">\n\t\t<line-chart [subject]=\"subject\"></line-chart>\n\t</div>\n\n\n\t<share-buttons\n\t [url]=\"'http://kvinnorochman.se'\"\n\t [count]=\"false\"\n\t [totalCount]=\"false\"\n\t >\n\t </share-buttons>\n\t <menu [subject]=\"subject\"></menu>\n</div>\n";
 
 /***/ },
 /* 607 */,
