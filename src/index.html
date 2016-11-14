@@ -2,14 +2,23 @@
 <html>
 <head>
   <meta charset=UTF-8>
-  <meta property="og:url" content="http://kvinnorochman.se/" />
+  <meta property="og:url" content="http://kvinnorochman.se" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="kvinnor&män - enkelt, tydligt och ärligt" />
-	<meta property="og:description" content="Vad säger statistiken om löner, sömnproblem eller tobaksvanor mellan kvinnor&män ?" />
-	<meta property="og:image" content="coolimg.png" />
+	<meta property="og:title" content="kvinnor&män - Beta 0.1.2b" />
+	<meta property="og:description" content="Titta på statistik från scb, hur skilljer sig siffrorna mellan kvinnor&män i Sverige?" />
+	<meta property="og:image" content="assets/img/logo.png" />
   <title>kvinnor&män</title>
+
   <base href="/">
 
+  <link rel="stylesheet" type="text/css" href="assets/css/ng2-select.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/glyphicons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/prism-okaidia.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/master-css.css">
+
+  <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="assets/favicons/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="assets/favicons/favicon-16x16.png" sizes="16x16">
@@ -18,17 +27,22 @@
   <link rel="shortcut icon" href="assets/favicons/favicon.ico">
   <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
-
-
-  <link rel="stylesheet" type="text/css" href="assets/css/ng2-select.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/glyphicons.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/prism-okaidia.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/master-css.css">
 </head>
 
+
+
 <body>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-87362157-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
   <my-app></my-app>
   <div class="loading">
         <h1 style="'font-size': '5vw'">Laddar...</h1>

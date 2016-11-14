@@ -10,11 +10,14 @@ import { ShareButtonsModule } from "ng2-sharebuttons";
 
 import { ROUTING } from './app.routing.ts';
 import { MyApp } from './app/app';
+import {JsonpModule} from '@angular/http';
+
 
 import { About } from './app/about/about';
 import { Home } from './app/home/home';
 
 import { StartComponent } from './app/start/start.component';
+import { MaillistComponent } from './app/maillist/maillist.component';
 import { StatisticsComponent } from './app/statistics/statistics.component';
 import { MenuComponent } from './app/menu/menu.component';
 import { FooterComponent } from './app/footer/footer.component';
@@ -51,7 +54,8 @@ const WINDOW_PROVIDER: ValueProvider = {
   ChartModule,
   FormsModule,
   ShareButtonsModule,
-  Ng2PageScrollModule
+  Ng2PageScrollModule,
+  JsonpModule
   ],
   declarations: [
   MyApp,
@@ -66,7 +70,8 @@ const WINDOW_PROVIDER: ValueProvider = {
   SelectComponent,
   HighlightPipe,
   OffClickDirective,
-  FooterComponent
+  FooterComponent,
+  MaillistComponent
   //StatisticsService
   ],
   bootstrap: [ MyApp ],

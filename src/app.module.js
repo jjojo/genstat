@@ -17,9 +17,11 @@ var line_chart_1 = require("./app/lineChart/line-chart");
 var ng2_sharebuttons_1 = require("ng2-sharebuttons");
 var app_routing_ts_1 = require("./app.routing.ts");
 var app_1 = require("./app/app");
+var http_2 = require("@angular/http");
 var about_1 = require("./app/about/about");
 var home_1 = require("./app/home/home");
 var start_component_1 = require("./app/start/start.component");
+var maillist_component_1 = require("./app/maillist/maillist.component");
 var statistics_component_1 = require("./app/statistics/statistics.component");
 var menu_component_1 = require("./app/menu/menu.component");
 var footer_component_1 = require("./app/footer/footer.component");
@@ -53,7 +55,8 @@ AppModule = __decorate([
             angular2_chartjs_1.ChartModule,
             forms_1.FormsModule,
             ng2_sharebuttons_1.ShareButtonsModule,
-            ng2_page_scroll_1.Ng2PageScrollModule
+            ng2_page_scroll_1.Ng2PageScrollModule,
+            http_2.JsonpModule
         ],
         declarations: [
             app_1.MyApp,
@@ -68,7 +71,8 @@ AppModule = __decorate([
             select_1.SelectComponent,
             select_pipes_1.HighlightPipe,
             off_click_1.OffClickDirective,
-            footer_component_1.FooterComponent
+            footer_component_1.FooterComponent,
+            maillist_component_1.MaillistComponent
         ],
         bootstrap: [app_1.MyApp],
         providers: [

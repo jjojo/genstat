@@ -7,6 +7,7 @@ import { StatisticsService } from '../services/statistics.service';
   template: `
 	<div class="wrapper">
 		<start></start>
+    <mail-list></mail-list>
 		<statistics></statistics>
 	</div>`,
   styles: [String(require('./home.styl'))],
@@ -14,5 +15,5 @@ import { StatisticsService } from '../services/statistics.service';
 })
 export class Home {
   constructor(private statisticsService: StatisticsService) {
-  } 
+  }
 }
