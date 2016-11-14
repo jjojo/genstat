@@ -18,7 +18,7 @@ export class LineChartComponent {
   chartFontSize;
   ngOnInit(){
 
-    console.log(this.subject['subject'])
+    //console.log(this.subject['subject'])
     this.id = this.subject['subject'] + "Chart"
     if(window.outerWidth < 1050){
       this.chartFontSize = 20
