@@ -1,0 +1,47 @@
+@import '../../../node_modules/jeet/stylus/jeet/index.styl'
+//@require '../../../node_modules/rupture/rupture/index.styl'
+@require '../../assets/css/variables'
+
+.wrapper
+	span(1)
+	margin-bottom: 12%
+
+	.disabled
+		background-color: transparent !important
+		border solid 2px black
+	.active
+		background-color: dark-grey
+		color white
+		border solid 2px white
+		outline: none
+		&:hover
+			cursor: pointer;
+
+	.form
+		text-align: center;
+		input
+			width: 200px
+			box-shadow none
+			border-width 2px
+			border-style solid
+			border-radius 5px
+			padding: 4px
+
+		.submit-btn
+			border-radius 5px
+			font-size 1em
+			padding 5px 25px
+			+tablet()
+				margin-top: 0
+			+mobile(orientation: portrait)
+				margin-top: 0
+				padding 15px 35px
+				font-size: 3em
+			+mobile(orientation: landscape)
+				margin-top: 0
+
+	p
+		#valid
+			color: green
+		#notValid
+			color: red
