@@ -57,7 +57,7 @@ export class StatisticsService {
 				subjectNr: 3,
 				optionsUrl: "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/LE/LE0101/LE0101H/LE0101H25",
 				title: "tobak",
-				iconUrl: "../../assets/img/drink",
+				iconUrl: "../../assets/img/smoke",
 				color: "rgba(174, 200, 137, 1)",
 				description:"Hur ser tobaksvanorna ut för kvinnor & män?",
 				source:['http://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__LE__LE0101__LE0101H/LE0101H25/?rxid=dc163be6-69d0-4285-9e05-2dbdacdf0e0f']
