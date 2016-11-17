@@ -4825,7 +4825,7 @@ var EconService = (function () {
             options: [
                 {
                     items: yrken,
-                    placeholder: "utbilgningsgrupp",
+                    placeholder: "utbildningsgrupp",
                     id: "workgroup"
                 },
                 {

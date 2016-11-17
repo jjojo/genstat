@@ -36,7 +36,7 @@ export class EconService {
 				options: [
 					{
 						items: yrken,
-						placeholder: "utbilgningsgrupp",
+						placeholder: "utbildningsgrupp",
 						id: "workgroup"
 					},
 					{
