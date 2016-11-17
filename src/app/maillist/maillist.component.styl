@@ -26,6 +26,9 @@
 			border-style solid
 			border-radius 5px
 			padding: 4px
+			+mobile(orientation: portrait)
+				font-size 4em
+				width 80%
 
 		.submit-btn
 			border-radius 5px
@@ -37,9 +40,12 @@
 				margin-top: 0
 				padding 15px 35px
 				font-size: 3em
+				margin-top 20px
 			+mobile(orientation: landscape)
 				margin-top: 0
-
+	h3
+		+mobile(orientation: portrait)
+			font-size 6vw
 	p
 		#valid
 			color: green
