@@ -8,6 +8,9 @@ This is the home repository of http://kvinnorochman.se/, a site that retrives ge
 ## Tekniker och ramverk
 
 Chartjs              -  http://www.chartjs.org/
+
 Chartjs github page  -  https://github.com/chartjs/Chart.js
+
 Angular2 (beta)      -  https://angular.io/ (now version 4)
+
 Rupture              -  https://github.com/jescalan/rupture
